@@ -738,6 +738,14 @@ svg {
 .site-header.header-dark .primary-nav a {
   color: #fff;
 }
+/* .btn-accent's own dark text (#06201f) is what gives it enough contrast
+   against its light teal background — the white-text rule above is meant
+   for plain nav links, but it also matches this button (same specificity
+   weight class-wise, later in the cascade) and was overriding that dark
+   text with white-on-teal, ~1.56:1 contrast (WCAG AA needs 4.5:1). */
+.site-header.header-dark .primary-nav a.btn-accent {
+  color: #06201f;
+}
 .site-header.header-dark .primary-nav {
   background: var(--hero-dark-1);
   border-bottom: 1px solid rgba(47, 230, 214, 0.18);

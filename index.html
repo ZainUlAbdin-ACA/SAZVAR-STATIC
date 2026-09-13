@@ -6,13 +6,13 @@
 <title>Sazvar | Industrial Engineering, Procurement &amp; Corporate Solutions</title>
 <meta name="description" content="Sazvar delivers integrated B2B solutions across engineering &amp; plant maintenance, commercial solar, heavy logistics, civil &amp; facility services, procurement, and corporate &amp; financial solutions — through one accountable team. Pakistan-based, growing toward the GCC." />
 <link rel="icon" href="assets/img/sazvar-mark.svg" type="image/svg+xml" />
-<link rel="stylesheet" href="assets/css/style.min.css?v=12" />
+<link rel="stylesheet" href="assets/css/style.min.css?v=13" />
 </head>
 <body class="homepage">
 
 <header class="site-header header-dark">
   <div class="container header-inner">
-    <a href="index.html" class="logo" aria-label="Sazvar home — Built On Reliability">
+    <a href="index.html" class="logo">
       <img src="assets/img/sazvar-mark.svg" width="42" height="42" alt="" />
       <span class="logo-text-container">
         <span class="logo-word company-name">SAZVAR | <bdi lang="ur" style="font-weight:600">سازوار</bdi></span>
@@ -105,7 +105,10 @@
       </div>
 
       <div class="hero-signboard-visual" id="hero-signboard-visual">
-        <img src="assets/img/hero/mobile-signboard.png" alt="Site sign: Project of DR Enterprise" width="220" height="360" />
+        <picture>
+          <source type="image/webp" srcset="assets/img/hero/mobile-signboard-std.webp" />
+          <img src="assets/img/hero/mobile-signboard-std.png" alt="Site sign: Project of DR Enterprise" width="220" height="360" />
+        </picture>
       </div>
 
       <div class="hero-copy-bottom">
@@ -183,17 +186,41 @@
           <p class="site-headline h4">One Job Done — Already Moving To The Next Site.</p>
         </div>
         <div class="plant-rig" id="plant-rig">
-          <img src="assets/img/hero/plant.png" alt="Small industrial plant with elevated tank and site office" loading="lazy" width="900" height="659" />
+          <!-- Two source sizes (desktop's larger on-screen size vs. mobile's
+               much smaller one) plus WebP-with-PNG-fallback for each, so
+               phones aren't downloading a desktop-sized image — see the
+               Lighthouse notes in SAZVAR-HANDOVER.md. -->
+          <picture>
+            <source media="(min-width: 960px)" type="image/webp" srcset="assets/img/hero/plant-lg.webp" />
+            <source media="(min-width: 960px)" srcset="assets/img/hero/plant-lg.png" />
+            <source type="image/webp" srcset="assets/img/hero/plant-sm.webp" />
+            <img src="assets/img/hero/plant-sm.png" alt="Small industrial plant with elevated tank and site office" loading="lazy" width="480" height="351" />
+          </picture>
         </div>
         <div class="truck-rig" id="truck-rig">
-          <img src="assets/img/hero/delivery-truck.png?v=2" alt="Delivery truck arriving with materials and equipment" loading="lazy" width="900" height="381" />
+          <picture>
+            <source media="(min-width: 960px)" type="image/webp" srcset="assets/img/hero/delivery-truck-lg.webp" />
+            <source media="(min-width: 960px)" srcset="assets/img/hero/delivery-truck-lg.png" />
+            <source type="image/webp" srcset="assets/img/hero/delivery-truck-sm.webp" />
+            <img src="assets/img/hero/delivery-truck-sm.png" alt="Delivery truck arriving with materials and equipment" loading="lazy" width="280" height="119" />
+          </picture>
         </div>
         <div class="office-rig" id="office-rig">
-          <img src="assets/img/hero/site-office.png" alt="Site office with rooftop solar panels" loading="lazy" width="700" height="511" />
-          <img src="assets/img/hero/sazvar-site-sign.png" class="site-sign-img" alt="Sazvar Site signboard" loading="lazy" width="260" height="320" />
+          <picture>
+            <source media="(min-width: 960px)" type="image/webp" srcset="assets/img/hero/site-office-lg.webp" />
+            <source media="(min-width: 960px)" srcset="assets/img/hero/site-office-lg.png" />
+            <source type="image/webp" srcset="assets/img/hero/site-office-sm.webp" />
+            <img src="assets/img/hero/site-office-sm.png" alt="Site office with rooftop solar panels" loading="lazy" width="340" height="248" />
+          </picture>
+          <img src="assets/img/hero/sazvar-site-sign.png?v=2" class="site-sign-img" alt="Sazvar Site signboard" loading="lazy" width="260" height="320" />
         </div>
         <div class="handshake-rig" id="handshake-rig">
-          <img src="assets/img/hero/handshake.png" alt="Sazvar engineer and the plant owner shaking hands after handover" loading="lazy" width="464" height="680" />
+          <picture>
+            <source media="(min-width: 960px)" type="image/webp" srcset="assets/img/hero/handshake-lg.webp" />
+            <source media="(min-width: 960px)" srcset="assets/img/hero/handshake-lg.png" />
+            <source type="image/webp" srcset="assets/img/hero/handshake-sm.webp" />
+            <img src="assets/img/hero/handshake-sm.png" alt="Sazvar engineer and the plant owner shaking hands after handover" loading="lazy" width="190" height="278" />
+          </picture>
           <span class="chat-bubble chat-engineer">Your Plant is Operational Now!</span>
           <span class="chat-bubble chat-owner">Thanks for the Great Work, SAZVAR!</span>
         </div>
@@ -384,7 +411,7 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=3"></script>
+<script src="assets/js/main.min.js?v=1"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 <script>
   // Stretch the tagline (letter-spacing) so it always spans exactly as wide as
@@ -409,7 +436,7 @@
   })();
 
 </script>
-<script src="assets/js/stack-scroll.js?v=6"></script>
+<script src="assets/js/stack-scroll.min.js?v=1"></script>
 </body>
 </html>
 
