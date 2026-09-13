@@ -1,8 +1,9 @@
 # Sazvar static site — caching rules.
 # Images/CSS/JS/fonts are cached for a year; HTML is always revalidated so
-# page edits go live immediately. style.css is loaded with a "?v=" query
-# string in the HTML (see index.html etc.) — bump that number whenever
-# style.css changes, so the long cache below never serves a stale stylesheet.
+# page edits go live immediately. style.css, main.js and stack-scroll.js are
+# all loaded with a "?v=" query string in the HTML (see index.html etc.) —
+# bump that number whenever the file changes, so the long cache below never
+# serves a stale stylesheet or script.
 
 <IfModule mod_expires.c>
   ExpiresActive On
