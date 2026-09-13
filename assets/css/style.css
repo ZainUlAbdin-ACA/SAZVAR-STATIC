@@ -985,6 +985,17 @@ svg {
 }
 .site-stage {
   position: relative;
+  /* .site-stage-sticky (its parent) is a flex container so it can vertically
+     center this box — but that also makes .site-stage a flex ITEM, and flex
+     items shrink to fit their content by default. Every plant/truck/office
+     rig inside is position:absolute (zero-width as far as content-sizing is
+     concerned), so without this the box would collapse to almost nothing
+     and every rig's percentage-based left/right would resolve against that
+     tiny width instead of the real container width — bunching plant, truck
+     and office on top of each other with no gap between them. Explicit
+     width keeps it filling .container's normal max-width like any other
+     section. */
+  width: 100%;
   height: 300px;
   padding: 40px 0 70px;
   background:
