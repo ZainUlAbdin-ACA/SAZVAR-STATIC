@@ -780,8 +780,12 @@ svg {
 @media (min-width: 960px) {
   .hero-dark .container {
     grid-template-columns: 1.05fr 0.95fr;
+    grid-template-areas: "top visual" "bottom visual";
     align-items: start;
   }
+  .hero-copy-top { grid-area: top; }
+  .hero-copy-bottom { grid-area: bottom; }
+  .hero-crane-visual { grid-area: visual; }
 }
 /* As the site-band scrolls into view and starts covering the pinned hero,
    the hero content recedes (dims + shrinks slightly) so the transition
@@ -845,6 +849,41 @@ svg {
 .hero-dark .hero-footnote {
   color: #8fa6a3;
 }
+
+/* ---- Mobile hero: tighter spacing + single-line buttons, so the CTA row
+   sits on the first screen instead of needing a scroll. ---- */
+@media (max-width: 859px) {
+  .hero-dark { padding: 22px 0 24px; }
+  .hero-dark .container { gap: 14px; }
+  .hero-dark h1 { margin-bottom: 4px; }
+  .hero-dark .hero-slogan { margin-bottom: 10px; }
+  .hero-dark p.lead { margin-bottom: 0; margin-top: 18px; }
+  .hero-dark .button-row { margin: 0 0 6px; }
+
+  /* CTA buttons read right after the tagline, ahead of the longer body
+     copy, so "Contact Us" is reachable on the first screen without
+     scrolling past a paragraph first. */
+  .hero-copy-bottom {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-copy-bottom .hero-slogan { order: 1; }
+  .hero-copy-bottom .button-row { order: 2; }
+  .hero-copy-bottom p.lead { order: 3; }
+}
+@media (max-width: 420px) {
+  .hero-dark .button-row {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .hero-dark .button-row .btn {
+    flex: 1 1 0;
+    padding: 12px 10px;
+    font-size: 13.5px;
+    white-space: nowrap;
+    justify-content: center;
+  }
+}
 .hero-dark .status-dot {
   background: var(--accent);
 }
@@ -866,20 +905,16 @@ svg {
 }
 
 /* ---- Mobile-only signboard visual (crane doesn't read well on phones —
-   it lands below the fold since the hero grid stacks to one column). This
-   sits in the hero itself so it's visible without scrolling, and plays a
-   one-shot "being installed" drop-and-settle animation on load. ---- */
+   it lands below the fold since the hero grid stacks to one column). Sits
+   in normal flow right under the headline, and plays a one-shot "being
+   installed" drop-and-settle animation on load. ---- */
 .hero-signboard-visual { display: none; }
 @media (max-width: 859px) {
-  .hero-dark { position: relative; }
   .hero-crane-visual { display: none; }
   .hero-signboard-visual {
     display: block;
-    position: absolute;
-    top: 6px;
-    right: 4%;
-    width: 66px;
-    z-index: 2;
+    width: min(190px, 50vw);
+    margin: 2px auto 4px;
   }
   .hero-signboard-visual img {
     width: 100%;
@@ -888,7 +923,7 @@ svg {
   }
 }
 @keyframes signboardInstall {
-  0% { transform: translateY(-140px) rotate(-3deg); opacity: 0; }
+  0% { transform: translateY(-170px) rotate(-3deg); opacity: 0; }
   60% { transform: translateY(6px) rotate(1deg); opacity: 1; }
   80% { transform: translateY(-4px) rotate(-0.5deg); }
   100% { transform: translateY(0) rotate(0deg); opacity: 1; }
