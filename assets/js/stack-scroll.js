@@ -58,20 +58,18 @@
       panel.style.setProperty("--stack-shade", (cover * 0.13).toFixed(4));
     });
     if (stage && storyIndex >= 0) {
-      // Six chapters, driven by one 0..1 progress value: on desktop this
-      // rides the same panel-cover math as the rest of the page-wide
-      // stacking (untouched below); on phones/tablets — where that
-      // page-wide stacking stays off — it instead reads how far we've
-      // scrolled through .site-band's own tall wrapper (see the
-      // max-width:959px CSS), so the same choreography plays out locally
-      // without turning on the site-wide stack effect. Reduced-motion
+      // Six chapters, driven by one 0..1 progress value, read the same way
+      // on every screen size: how far we've scrolled through .site-band's
+      // own tall wrapper (see the CSS — it's tall everywhere now, with the
+      // scene held in place by its own nested sticky pin, independent of
+      // the page-wide stacking that still handles panel-to-panel cover
+      // transitions). That's what gives the story real scroll room instead
+      // of racing through in one viewport-height on desktop. Reduced-motion
       // users just get the finished scene, no scroll-tied motion.
       var bandGeo = geometry[storyIndex];
       var progress;
       if (motion.matches) {
         progress = 1;
-      } else if (active) {
-        progress = clamp((scroll + window.innerHeight - bandGeo.start) / viewport);
       } else {
         // Mirrors the sticky panel's own height: calc(100svh - header).
         progress = clamp((scroll - bandGeo.start) / Math.max(1, bandGeo.height - viewport));

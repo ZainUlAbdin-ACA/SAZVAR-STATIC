@@ -968,9 +968,12 @@ svg {
   position: relative;
   z-index: 2;
 }
-@media (max-width: 959px) {
-  .site-band { min-height: 280vh; }
-}
+/* Tall on every screen size now — this is what gives the 6-chapter story
+   (plant/truck/office/handshake) enough scroll room to play out at a
+   readable pace instead of rushing through in one viewport-height of
+   scroll. See .homepage .site-stage-sticky below for how the scene stays
+   pinned in place while that extra height scrolls underneath it. */
+.site-band { min-height: 280vh; }
 .site-stage-sticky {
   overflow: hidden;
 }
@@ -1349,20 +1352,21 @@ svg {
 .homepage :focus-visible { outline: 3px solid var(--teal); outline-offset: 5px; }
 .homepage .header-dark :focus-visible { outline-color: var(--accent); }
 
-/* Phones/tablets get their own local pin for the plant/truck/office scene
-   (site-band is made tall in the "scroll story" rules above) — same idea
-   as the desktop stack-panel pin just above, but scoped to this one
-   section instead of turning on page-wide stacking. Written as
-   ".homepage .site-stage-sticky" (matching the reset two rules up) so it
-   actually wins instead of silently losing to that reset. */
-@media (max-width: 959px) {
-  .homepage .site-stage-sticky {
-    position: sticky;
-    top: var(--stack-header, 79px);
-    height: calc(100svh - var(--stack-header, 79px));
-    display: flex;
-    align-items: center;
-  }
+/* The plant/truck/office/handshake scene gets its own LOCAL pin, nested
+   inside .site-band (made tall above), on every screen size — on phones
+   this is the only thing holding it in place; on desktop it nests inside
+   the page-wide stack-panel pin (below), independently keeping the scene
+   glued near the top of the viewport while the tall .site-band's extra
+   height scrolls underneath it, which is what gives the story genuine
+   scroll room instead of racing through in one viewport-height. Written
+   as ".homepage .site-stage-sticky" (matching the reset two rules up) so
+   it actually wins instead of silently losing to that reset. */
+.homepage .site-stage-sticky {
+  position: sticky;
+  top: var(--stack-header, 79px);
+  height: calc(100svh - var(--stack-header, 79px));
+  display: flex;
+  align-items: center;
 }
 
 @media (min-width: 960px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
@@ -1394,9 +1398,14 @@ svg {
   .stack-enabled main > .section > .container { width: 100%; }
   .stack-enabled .hero-dark { min-height: calc(100svh - var(--stack-header)); }
   .stack-enabled .site-band {
-    display: flex;
-    align-items: center;
     background: var(--hero-dark-1);
+    /* .stack-panel above sets its own min-height (100svh - header) for
+       ordinary single-viewport panels; that rule ties with this one on
+       specificity, so without repeating the override here it would win by
+       source order and silently cancel .site-band's 280vh tall wrapper,
+       collapsing the 6-chapter story back to one viewport-height of scroll
+       on desktop. Keep this in sync with the plain ".site-band" rule above. */
+    min-height: 280vh;
   }
   .stack-enabled .site-stage-sticky { width: 100%; }
   .stack-enabled .site-stage { height: min(560px, calc(100svh - var(--stack-header) - 48px)); }
