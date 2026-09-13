@@ -2,15 +2,18 @@
 /**
  * Sazvar contact form handler.
  *
- * Plain PHP mail() — no frameworks/dependencies, matching the rest of this
- * site's "no build step" approach. Runs on Hostinger's own PHP (included
- * free with the hosting plan; no signup, no submission cap, no third party
- * seeing the enquiry).
+ * Sends via SMTP (PHPMailer, through the info@sazvar.com mailbox) when
+ * smtp-config.php exists on the server — that gives proper SPF/DKIM
+ * authentication, so mail is far less likely to land in spam, and sidesteps
+ * Hostinger's tight rate limit on the plain mail() function (10/min, 100/day
+ * — see https://www.hostinger.com/support/11393648).
  *
- * If mail ever lands in spam / doesn't arrive, the usual fix is adding an
- * SPF record for sazvar.com authorizing Hostinger's mail servers, and/or
- * switching this to SMTP via an actual info@sazvar.com mailbox — see
- * SAZVAR-HANDOVER.md.
+ * smtp-config.php holds the real mailbox password and is never committed to
+ * this public repo (see .gitignore + smtp-config.sample.php for setup). If
+ * it isn't present yet — e.g. right after a fresh deploy, before that file
+ * has been created on the server — this falls back to PHP's plain mail()
+ * so the form keeps working either way; it just upgrades automatically the
+ * moment smtp-config.php is added.
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -60,7 +63,6 @@ if (!empty($errors)) {
 
 $to = 'info@sazvar.com';
 $subject = 'Sazvar enquiry from ' . $name;
-
 $body = implode("\n", [
     'Name: ' . $name,
     'Company/Institution: ' . $org,
@@ -71,20 +73,58 @@ $body = implode("\n", [
     $details,
 ]);
 
-// From stays on the site's own domain so mail hosts don't flag it as
-// spoofed; Reply-To is the enquirer's address so hitting "Reply" in your
-// inbox goes straight back to them.
-$headers = implode("\r\n", [
-    'From: Sazvar Website <no-reply@sazvar.com>',
-    'Reply-To: ' . $name . ' <' . $email . '>',
-    'Content-Type: text/plain; charset=UTF-8',
-]);
+$sent = false;
+$sendError = '';
 
-$sent = @mail($to, $subject, $body, $headers);
+$smtpConfigFile = __DIR__ . '/smtp-config.php';
+if (file_exists($smtpConfigFile)) {
+    require_once __DIR__ . '/lib/phpmailer/Exception.php';
+    require_once __DIR__ . '/lib/phpmailer/PHPMailer.php';
+    require_once __DIR__ . '/lib/phpmailer/SMTP.php';
+    require_once $smtpConfigFile;
+
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host       = SMTP_HOST;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = SMTP_USERNAME;
+        $mail->Password   = SMTP_PASSWORD;
+        $mail->SMTPSecure = SMTP_SECURE;
+        $mail->Port       = SMTP_PORT;
+        $mail->CharSet    = 'UTF-8';
+
+        $mail->setFrom(SMTP_USERNAME, 'Sazvar Website');
+        $mail->addAddress($to);
+        // Reply-To is the enquirer's own address, so hitting "Reply" in your
+        // inbox goes straight back to them.
+        $mail->addReplyTo($email, $name);
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        $mail->isHTML(false);
+
+        $mail->send();
+        $sent = true;
+    } catch (Exception $e) {
+        $sendError = $mail->ErrorInfo;
+    }
+} else {
+    // No SMTP credentials on the server yet — fall back to plain mail().
+    // From stays on the site's own domain so mail hosts don't flag it as
+    // spoofed; Reply-To is the enquirer's address.
+    $headers = implode("\r\n", [
+        'From: Sazvar Website <no-reply@sazvar.com>',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+        'Content-Type: text/plain; charset=UTF-8',
+    ]);
+    $sent = @mail($to, $subject, $body, $headers);
+    if (!$sent) $sendError = 'mail() returned false';
+}
 
 if ($sent) {
     echo json_encode(['ok' => true]);
 } else {
     http_response_code(500);
+    error_log('Sazvar contact form send failure: ' . $sendError);
     echo json_encode(['ok' => false, 'error' => 'The message could not be sent. Please email info@sazvar.com directly.']);
 }
