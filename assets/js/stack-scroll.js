@@ -58,7 +58,7 @@
       panel.style.setProperty("--stack-shade", (cover * 0.13).toFixed(4));
     });
     if (stage && storyIndex >= 0) {
-      // Five chapters, driven by one 0..1 progress value: on desktop this
+      // Six chapters, driven by one 0..1 progress value: on desktop this
       // rides the same panel-cover math as the rest of the page-wide
       // stacking (untouched below); on phones/tablets — where that
       // page-wide stacking stays off — it instead reads how far we've
@@ -76,19 +76,22 @@
         // Mirrors the sticky panel's own height: calc(100svh - header).
         progress = clamp((scroll - bandGeo.start) / Math.max(1, bandGeo.height - viewport));
       }
-      // Plant settles, truck arrives, office (+ sign) settles, truck
-      // leaves, then — only once the truck is fully gone — the engineer
-      // and plant owner shake on it.
-      stage.style.setProperty("--plant-progress", clamp(progress / 0.22).toFixed(4));
-      stage.style.setProperty("--truck-in-progress", clamp((progress - 0.18) / 0.22).toFixed(4));
-      stage.style.setProperty("--office-progress", clamp((progress - 0.38) / 0.2).toFixed(4));
-      stage.style.setProperty("--truck-out-progress", clamp((progress - 0.55) / 0.2).toFixed(4));
-      stage.style.setProperty("--handshake-progress", clamp((progress - 0.78) / 0.22).toFixed(4));
-      stage.classList.toggle("stage-1", progress < 0.22);
-      stage.classList.toggle("stage-2", progress >= 0.22 && progress < 0.4);
-      stage.classList.toggle("stage-3", progress >= 0.4 && progress < 0.58);
-      stage.classList.toggle("stage-4", progress >= 0.58 && progress < 0.78);
-      stage.classList.toggle("stage-5", progress >= 0.78);
+      // 1) plant settles  2) truck arrives  3) office (+ sign) settles
+      // 4) truck leaves  5) office fades back out  6) — once the stage is
+      // clear — the engineer and plant owner shake on it. A 7th "chapter"
+      // is just the page moving on to the next section afterwards.
+      stage.style.setProperty("--plant-progress", clamp(progress / 0.16).toFixed(4));
+      stage.style.setProperty("--truck-in-progress", clamp((progress - 0.14) / 0.18).toFixed(4));
+      stage.style.setProperty("--office-progress", clamp((progress - 0.3) / 0.16).toFixed(4));
+      stage.style.setProperty("--truck-out-progress", clamp((progress - 0.44) / 0.16).toFixed(4));
+      stage.style.setProperty("--office-out-progress", clamp((progress - 0.58) / 0.16).toFixed(4));
+      stage.style.setProperty("--handshake-progress", clamp((progress - 0.72) / 0.28).toFixed(4));
+      stage.classList.toggle("stage-1", progress < 0.16);
+      stage.classList.toggle("stage-2", progress >= 0.16 && progress < 0.32);
+      stage.classList.toggle("stage-3", progress >= 0.32 && progress < 0.48);
+      stage.classList.toggle("stage-4", progress >= 0.48 && progress < 0.62);
+      stage.classList.toggle("stage-5", progress >= 0.62 && progress < 0.76);
+      stage.classList.toggle("stage-6", progress >= 0.76);
     }
   }
 

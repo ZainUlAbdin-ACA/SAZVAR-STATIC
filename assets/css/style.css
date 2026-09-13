@@ -1116,7 +1116,10 @@ svg {
   width: 30%;
   aspect-ratio: 1005 / 694;
   z-index: 2;
-  opacity: var(--office-progress, 1);
+  /* Settles in, stays, then fades back out (see --office-out-progress in
+     stack-scroll.js) once the handover story moves on to the handshake —
+     the "Sazvar Site" sign nested inside fades with it automatically. */
+  opacity: calc(var(--office-progress, 1) * (1 - var(--office-out-progress, 0)));
   transform: translateY(calc((1 - var(--office-progress, 1)) * 45px));
 }
 @media (min-width: 960px) {
