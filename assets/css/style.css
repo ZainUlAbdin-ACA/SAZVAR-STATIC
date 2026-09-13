@@ -589,6 +589,23 @@ svg {
   color: var(--muted);
   margin-top: 12px;
 }
+.form-note.is-error {
+  color: #c0392b;
+}
+.form-note.is-success {
+  color: var(--teal, #0f8f7e);
+}
+/* Honeypot spam trap — hidden from sighted and screen-reader users alike,
+   but still present in the DOM/tab order removed via tabindex so only
+   bots that blindly fill every field will ever populate it. */
+.form-field-hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
 
 /* ---------- Footer ---------- */
 .site-footer {

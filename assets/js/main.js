@@ -130,18 +130,28 @@ document.addEventListener("DOMContentLoaded", function () {
   // --office-progress/--truck-out-progress custom properties it sets on
   // #site-stage each scroll frame.
 
-  // Contact form: prepare a mailto draft. No backend is connected yet,
-  // so this deliberately does not claim the message was sent.
+  // Contact form: posts to contact.php, which emails info@sazvar.com
+  // directly (see that file). Falls back to a mailto draft if the request
+  // itself fails (e.g. offline, or PHP unavailable) so an enquiry is never
+  // silently lost.
   var form = document.getElementById("contact-form");
   if (form) {
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+    var submitBtn = document.getElementById("form-submit");
+    var note = document.getElementById("form-status");
+
+    function setNote(text, state) {
+      if (!note) return;
+      note.textContent = text;
+      note.classList.remove("is-error", "is-success");
+      if (state) note.classList.add(state);
+    }
+
+    function mailtoFallback() {
       var name = form.name.value.trim();
       var org = form.organization.value.trim();
       var email = form.email.value.trim();
       var service = form.service.value;
       var details = form.details.value.trim();
-
       var subject = encodeURIComponent("Sazvar enquiry from " + name);
       var body = encodeURIComponent(
         "Name: " + name +
@@ -150,14 +160,39 @@ document.addEventListener("DOMContentLoaded", function () {
         "\nService: " + service +
         "\n\nRequirement:\n" + details,
       );
-
       window.location.href = "mailto:info@sazvar.com?subject=" + subject + "&body=" + body;
+      setNote("Couldn't reach the server, so we opened your email client instead — please review and hit send there.");
+    }
 
-      var note = document.getElementById("form-status");
-      if (note) {
-        note.textContent =
-          "Your email client should now open with this enquiry pre-filled. Nothing has been sent automatically — please review and hit send.";
-      }
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (submitBtn) submitBtn.disabled = true;
+      setNote("Sending…");
+
+      fetch("contact.php", {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" },
+      })
+        .then(function (response) {
+          return response.json().catch(function () { return null; }).then(function (data) {
+            return { ok: response.ok, data: data };
+          });
+        })
+        .then(function (result) {
+          if (submitBtn) submitBtn.disabled = false;
+          if (result.ok && result.data && result.data.ok) {
+            form.reset();
+            setNote("Thanks — your enquiry has been sent. We'll get back to you within 1 business day.", "is-success");
+          } else {
+            var message = (result.data && result.data.error) || "Something went wrong sending that.";
+            setNote(message, "is-error");
+          }
+        })
+        .catch(function () {
+          if (submitBtn) submitBtn.disabled = false;
+          mailtoFallback();
+        });
     });
   }
 });

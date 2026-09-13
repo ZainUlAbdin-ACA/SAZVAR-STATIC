@@ -6,7 +6,7 @@
 <title>Contact | Sazvar</title>
 <meta name="description" content="Get in touch with Sazvar about a procurement, engineering, construction, logistics, solar, or corporate &amp; financial solutions requirement." />
 <link rel="icon" href="assets/img/sazvar-mark.svg" type="image/svg+xml" />
-<link rel="stylesheet" href="assets/css/style.min.css?v=11" />
+<link rel="stylesheet" href="assets/css/style.min.css?v=12" />
 </head>
 <body>
 
@@ -102,6 +102,13 @@
       <p>Tell us about your procurement, engineering, construction, logistics, or corporate solutions need and we'll follow up with a clear plan.</p>
 
       <form id="contact-form">
+        <!-- Honeypot: hidden from real visitors via CSS, so only bots that
+             blindly fill every field will ever populate it. contact.php
+             silently discards any submission where this isn't empty. -->
+        <div class="form-field form-field-hp" aria-hidden="true">
+          <label for="website">Website</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
         <div class="form-field">
           <label for="name">Name</label>
           <input id="name" name="name" required minlength="2" maxlength="100" />
@@ -131,8 +138,8 @@
           <label for="details">Requirement details</label>
           <textarea id="details" name="details" rows="5" required minlength="20" maxlength="5000"></textarea>
         </div>
-        <button type="submit" class="btn">Send Enquiry</button>
-        <p class="form-note" id="form-status">This opens your email client with the enquiry pre-filled — nothing is sent automatically until you hit send there.</p>
+        <button type="submit" class="btn" id="form-submit">Send Enquiry</button>
+        <p class="form-note" id="form-status">We'll get back to you within 1 business day.</p>
       </form>
     </div>
   </section>
@@ -189,7 +196,7 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=2"></script>
+<script src="assets/js/main.js?v=3"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 <script>
   // Stretch the tagline (letter-spacing) so it always spans exactly as wide as
