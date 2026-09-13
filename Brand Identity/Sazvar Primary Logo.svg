@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title description">
+  <title id="title">Sazvar primary logo</title>
+  <desc id="description">Industrial teal gear containing a simple black S, above the Sazvar wordmark and Delivering Reliability brand line.</desc>
+  <rect width="1200" height="900" fill="#FCFCFA"/>
+
+  <!-- Engineered gear: a universal cue for coordinated technical services. -->
+  <g transform="translate(600 310)" fill="#087C7A">
+    <rect x="-31" y="-218" width="62" height="70" rx="10"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(30)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(60)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(90)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(120)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(150)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(180)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(210)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(240)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(270)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(300)"/>
+    <rect x="-31" y="-218" width="62" height="70" rx="10" transform="rotate(330)"/>
+    <circle r="177"/>
+    <circle r="121" fill="#FCFCFA"/>
+  </g>
+
+  <!-- Simple black S: direct, legible, and unmistakably tied to the Sazvar name. -->
+  <text x="600" y="378" text-anchor="middle" fill="#000000"
+        font-family="Arial, Helvetica, sans-serif" font-size="190" font-weight="800">S</text>
+
+  <!-- Wordmark and approved brand line. -->
+  <text x="600" y="655" text-anchor="middle" fill="#20282B"
+        font-family="Arial, Helvetica, sans-serif" font-size="124" font-weight="800" letter-spacing="16">SAZVAR</text>
+  <line x1="340" y1="706" x2="860" y2="706" stroke="#DCE2E1" stroke-width="3"/>
+  <text x="600" y="778" text-anchor="middle" fill="#087C7A"
+        font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="600" letter-spacing="7">DELIVERING RELIABILITY</text>
+</svg>

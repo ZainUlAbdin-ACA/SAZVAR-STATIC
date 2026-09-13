@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#E9ECEB}a{color:#087C7A}a:hover{color:#05605E}</style>
+</helmet>
+<div style="--accent: {{ accent }}; --sec: {{ secondary }}; width:1440px; background:#FCFCFA; color:#20282B; font-family:'IBM Plex Sans',system-ui,sans-serif; padding:56px 64px 72px; box-sizing:border-box;">
+
+  <header style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid #20282B; padding-bottom:20px;">
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#6B7574;">Brand identity board · v2 · 2026</span>
+      <h1 style="margin:0; font-family:'Archivo',sans-serif; font-weight:700; font-size:44px; letter-spacing:-0.02em;">Sazvar</h1>
+    </div>
+    <div style="max-width:520px; text-align:right; font-size:14px; line-height:1.6; color:#4A5453;">Procurement outsourcing &amp; engineering tender solutions — civil, solar and mechanical tenders, plus annual maintenance contracts for boilers and turbines. Pakistan &amp; GCC.</div>
+  </header>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px;">
+
+    <section style="grid-column:1 / -1; background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:28px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">01</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Logo</h2>
+        <span style="font-size:13px; color:#6B7574;">Existing gear-and-S mark kept; wordmark retuned to Archivo with wider tracking and a tighter brand line.</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1.3fr 1fr; gap:24px;">
+        <div style="background:#FCFCFA; border:1px solid #E4E8E7; padding:48px; display:flex; flex-direction:column; align-items:center; gap:22px;">
+          <dc-import name="Sazvar Mark" size="150" hint-size="150px,150px"></dc-import>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+            <div style="font-family:'Archivo',sans-serif; font-weight:800; font-size:50px; letter-spacing:.13em; line-height:1; color:#20282B; padding-left:.13em;">SAZVAR</div>
+            <div style="height:1px; width:300px; background:#DCE2E1;"></div>
+            <div style="font-family:'Archivo',sans-serif; font-weight:600; font-size:16px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent, #087C7A); padding-left:.2em;">Delivered with Reliability</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-rows:1fr 1fr; gap:16px;">
+          <div style="background:#FCFCFA; border:1px solid #E4E8E7; padding:22px; display:flex; align-items:center; justify-content:center; gap:18px;">
+            <dc-import name="Sazvar Mark" size="66" color="#20282B" inner="#FCFCFA" ink="#FCFCFA" hint-size="66px,66px"></dc-import>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:24px; letter-spacing:.12em; color:#20282B;">SAZVAR</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.14em; color:#8A9392;">1-COLOUR / INK</span>
+            </div>
+          </div>
+          <div style="background:var(--accent, #087C7A); padding:22px; display:flex; align-items:center; justify-content:center; gap:18px;">
+            <dc-import name="Sazvar Mark" size="66" color="#FFFFFF" inner="#087C7A" ink="#FFFFFF" hint-size="66px,66px"></dc-import>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:24px; letter-spacing:.12em; color:#FFFFFF;">SAZVAR</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.14em; color:#FFFFFF;">1-COLOUR / KNOCKOUT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:36px; border-top:1px solid #E4E8E7; padding-top:22px; flex-wrap:wrap; align-items:flex-start;">
+        <div style="display:flex; flex-direction:column; gap:8px;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392;">HORIZONTAL LOCKUP</span>
+          <div style="display:flex; align-items:center; gap:14px; padding:14px 24px; border:1px dashed #DCE2E1;">
+            <dc-import name="Sazvar Mark" size="44" hint-size="44px,44px"></dc-import>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:22px; letter-spacing:.12em;">SAZVAR</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:8px; letter-spacing:.2em; color:#6B7574;">DELIVERED WITH RELIABILITY</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392;">MARK ONLY · FAVICON / STAMP</span>
+          <div style="display:flex; align-items:center; gap:14px; padding:14px 24px; border:1px dashed #DCE2E1;">
+            <dc-import name="Sazvar Mark" size="44" hint-size="44px,44px"></dc-import>
+            <dc-import name="Sazvar Mark" size="28" hint-size="28px,28px"></dc-import>
+            <dc-import name="Sazvar Mark" size="18" hint-size="18px,18px"></dc-import>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px; flex:1; min-width:240px;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392;">RULES</span>
+          <p style="margin:0; font-size:13px; line-height:1.6; color:#4A5453;">Clear space equals the gear's tooth height on all sides. The S stays optically centred in the hub and never changes weight. Below 18&nbsp;px use the mark alone — the brand line drops out first, then the wordmark.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:24px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">02</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Colour</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:12px;">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:96px; background:#FCFCFA; border:1px solid #DCE2E1;"></div>
+          <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:12.5px; font-weight:600;">Canvas White</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#6B7574;">#FCFCFA</span><span style="font-size:11px; color:#8A9392;">Main background</span></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:96px; background:#F2F4F3; border:1px solid #DCE2E1;"></div>
+          <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:12.5px; font-weight:600;">Engineering Gray</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#6B7574;">#F2F4F3</span><span style="font-size:11px; color:#8A9392;">Alternate sections, cards</span></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:96px; background:var(--accent, #087C7A);"></div>
+          <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:12.5px; font-weight:600;">Industrial Teal</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#6B7574;">{{ accentHex }}</span><span style="font-size:11px; color:#8A9392;">Buttons, links, labels</span></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:96px; background:var(--sec, #055E5D);"></div>
+          <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:12.5px; font-weight:600;">Deep Teal</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#6B7574;">{{ secondaryHex }}</span><span style="font-size:11px; color:#8A9392;">Hover / active state</span></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:96px; background:#20282B;"></div>
+          <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:12.5px; font-weight:600;">Engineering Charcoal</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#6B7574;">#20282B</span><span style="font-size:11px; color:#8A9392;">Headings and body text</span></div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:96px; background:#DCE2E1;"></div>
+          <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:12.5px; font-weight:600;">Light Steel Gray</span><span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#6B7574;">#DCE2E1</span><span style="font-size:11px; color:#8A9392;">Borders and dividers</span></div>
+        </div>
+      </div>
+      <div style="display:flex; gap:18px; align-items:center; border-top:1px solid #E4E8E7; padding-top:18px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392;">RATIO</span>
+        <div style="flex:1; display:flex; height:14px;">
+          <div style="flex:70; background:#FCFCFA; border:1px solid #DCE2E1; box-sizing:border-box;"></div>
+          <div style="flex:20; background:#F2F4F3;"></div>
+          <div style="flex:8; background:var(--accent, #087C7A);"></div>
+          <div style="flex:2; background:var(--sec, #055E5D);"></div>
+        </div>
+        <span style="font-size:12px; color:#6B7574;">70% white · 20% gray · 8% teal · 2% deep teal or charcoal. No navy, no large black fields.</span>
+      </div>
+    </section>
+
+    <section style="background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:22px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">03</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Typography</h2>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px; border-bottom:1px solid #E4E8E7; padding-bottom:20px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392;">HEADLINE · ARCHIVO SEMIBOLD / EXTRABOLD</span>
+        <div style="font-family:'Archivo',sans-serif; font-weight:700; font-size:40px; line-height:1.05; letter-spacing:-0.02em;">Tenders won on<br>specification.</div>
+        <div style="font-family:'Archivo',sans-serif; font-weight:500; font-size:15px; color:#6B7574; letter-spacing:.02em;">ABCDEFGHIJKLM 0123456789 ﷼ ₨</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392;">BODY · IBM PLEX SANS REGULAR / MEDIUM</span>
+        <p style="margin:0; font-size:15px; line-height:1.65; max-width:560px; color:#39423F;">Sazvar manages vendor qualification, costing and documentation for civil, solar and mechanical tenders, and holds annual maintenance contracts on boilers and turbines. Plex Sans carries Latin, Arabic and Urdu-adjacent settings from one family, so bilingual documents keep a single voice.</p>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#6B7574; margin-top:6px;">IBM Plex Mono · reference numbers, specs, tender IDs — TND-2026-04471</span>
+      </div>
+    </section>
+
+    <section style="background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:20px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">04</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Tagline</h2>
+        <span style="font-size:13px; color:#6B7574;">Locked line, plus alternates for campaign or service-specific use.</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="display:flex; align-items:center; gap:16px; padding:20px 22px; background:var(--accent, #087C7A);">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#FFFFFF;">01</span>
+          <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+            <span style="font-family:'Archivo',sans-serif; font-weight:700; font-size:26px; color:#FFFFFF;">Delivered with Reliability</span>
+            <span style="font-size:12.5px; color:#FFFFFF;">Primary line. Set in Archivo SemiBold, uppercase with .2em tracking when locked to the logo.</span>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; padding:5px 9px; background:#FFFFFF; color:var(--accent, #087C7A);">LOCKED</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; padding:16px 18px; background:#FCFCFA; border-left:3px solid #DCE2E1;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8A9392;">02</span>
+          <div style="flex:1; display:flex; flex-direction:column; gap:3px;">
+            <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:22px;">Quality Supply, On Time</span>
+            <span style="font-size:12.5px; color:#6B7574;">Procurement-side alternate for invoices and vendor packs.</span>
+          </div>
+          <sc-if value="{{ rec2 }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; padding:5px 9px; background:var(--sec, #055E5D); color:#FFFFFF;">PICK</span></sc-if>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; padding:16px 18px; background:#FCFCFA; border-left:3px solid #DCE2E1;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8A9392;">03</span>
+          <div style="flex:1; display:flex; flex-direction:column; gap:3px;">
+            <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:22px;">Tenders Handled End to End</span>
+            <span style="font-size:12.5px; color:#6B7574;">For the tender-solutions line of business.</span>
+          </div>
+          <sc-if value="{{ rec3 }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; padding:5px 9px; background:var(--sec, #055E5D); color:#FFFFFF;">PICK</span></sc-if>
+        </div>
+        <div style="display:flex; align-items:center; gap:16px; padding:16px 18px; background:#FCFCFA; border-left:3px solid #DCE2E1;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8A9392;">04</span>
+          <div style="flex:1; display:flex; flex-direction:column; gap:3px;">
+            <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:22px;">Equipment Running, Contracts Kept</span>
+            <span style="font-size:12.5px; color:#6B7574;">AMC alternate for boiler and turbine service.</span>
+          </div>
+          <sc-if value="{{ rec4 }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; padding:5px 9px; background:var(--sec, #055E5D); color:#FFFFFF;">PICK</span></sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:20px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">05</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Services set</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="padding:16px 18px; background:#FCFCFA; border:1px solid #E4E8E7; display:flex; flex-direction:column; gap:5px;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--accent, #087C7A);">S-01</span><span style="font-weight:600; font-size:15px;">Procurement outsourcing</span><span style="font-size:12.5px; color:#6B7574;">Vendor qualification, costing, expediting.</span></div>
+        <div style="padding:16px 18px; background:#FCFCFA; border:1px solid #E4E8E7; display:flex; flex-direction:column; gap:5px;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--accent, #087C7A);">S-02</span><span style="font-weight:600; font-size:15px;">Civil tenders</span><span style="font-size:12.5px; color:#6B7574;">BOQ preparation and bid compilation.</span></div>
+        <div style="padding:16px 18px; background:#FCFCFA; border:1px solid #E4E8E7; display:flex; flex-direction:column; gap:5px;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--accent, #087C7A);">S-03</span><span style="font-weight:600; font-size:15px;">Solar tenders</span><span style="font-size:12.5px; color:#6B7574;">Sizing, BOS supply, EPC coordination.</span></div>
+        <div style="padding:16px 18px; background:#FCFCFA; border:1px solid #E4E8E7; display:flex; flex-direction:column; gap:5px;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--accent, #087C7A);">S-04</span><span style="font-weight:600; font-size:15px;">Mechanical tenders</span><span style="font-size:12.5px; color:#6B7574;">Rotating and static equipment packages.</span></div>
+        <div style="grid-column:1 / -1; padding:16px 18px; background:#FCFCFA; border:1px solid #E4E8E7; border-left:3px solid var(--sec, #055E5D); display:flex; flex-direction:column; gap:5px;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--sec, #055E5D);">S-05 · AMC</span><span style="font-weight:600; font-size:15px;">Yearly maintenance — boilers &amp; turbines</span><span style="font-size:12.5px; color:#6B7574;">Scheduled inspection, spares planning, breakdown response.</span></div>
+      </div>
+    </section>
+
+    <section style="grid-column:1 / -1; background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 44px; display:flex; flex-direction:column; gap:28px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">06</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Applications</h2>
+        <span style="font-size:13px; color:#6B7574;">Business card (85×55mm) and A4 letterhead.</span>
+      </div>
+
+      <div style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap;">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392;">VISITING CARD · FRONT</span>
+          <div style="width:374px; height:242px; background:#FFFFFF; border:1px solid #DCE2E1; box-shadow:0 2px 10px rgba(32,40,43,.07); padding:28px 32px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between;">
+            <div style="display:flex; align-items:center; gap:13px;">
+              <dc-import name="Sazvar Mark" size="42" hint-size="42px,42px"></dc-import>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:21px; letter-spacing:.12em; color:#20282B;">SAZVAR</span>
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:7.5px; letter-spacing:.2em; color:var(--accent, #087C7A);">DELIVERED WITH RELIABILITY</span>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:16px;">Hamza Raza Khan</span>
+              <span style="font-size:12px; color:#4A5453;">Manager — Tendering &amp; Contracts</span>
+              <div style="height:1px; background:#E4E8E7; margin:10px 0 9px;"></div>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#4A5453;">+92 300 000 0000 · hamza@sazvar.com</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#6B7574;">Lahore, PK · Dubai, UAE · sazvar.com</span>
+            </div>
+          </div>
+
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392; margin-top:8px;">VISITING CARD · BACK</span>
+          <div style="width:374px; height:242px; background:var(--accent, #087C7A); padding:30px 32px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:18px; box-shadow:0 2px 10px rgba(32,40,43,.07);">
+            <dc-import name="Sazvar Mark" size="62" color="#FFFFFF" inner="#087C7A" ink="#FFFFFF" hint-size="62px,62px"></dc-import>
+            <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#FFFFFF; padding-left:.18em;">Delivered with Reliability</span>
+          </div>
+        </div>
+
+        <div style="width:420px; height:594px; background:#FFFFFF; border:1px solid #DCE2E1; box-shadow:0 2px 14px rgba(32,40,43,.08); box-sizing:border-box; display:flex; flex-direction:column;">
+          <div style="padding:34px 40px 22px; display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid var(--accent, #087C7A);">
+            <div style="display:flex; align-items:center; gap:11px;">
+              <dc-import name="Sazvar Mark" size="38" hint-size="38px,38px"></dc-import>
+              <div style="display:flex; flex-direction:column; gap:3px;">
+                <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:19px; letter-spacing:.12em; color:#20282B;">SAZVAR</span>
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:7px; letter-spacing:.2em; color:var(--accent, #087C7A);">DELIVERED WITH RELIABILITY</span>
+              </div>
+            </div>
+            <div style="text-align:right; font-family:'IBM Plex Mono',monospace; font-size:9px; line-height:1.7; color:#6B7574;">SAZVAR PVT LTD<br>Gulberg III, Lahore 54660, PK<br>+92 42 000 0000 · sazvar.com</div>
+          </div>
+          <div style="padding:30px 40px; display:flex; flex-direction:column; gap:16px; flex:1;">
+            <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:#8A9392;"><span>REF · TND-2026-04471</span><span>12 SEP 2026</span></div>
+            <div style="font-family:'Archivo',sans-serif; font-weight:600; font-size:17px; line-height:1.25;">Technical &amp; commercial proposal — boiler AMC, Unit 3</div>
+            <div style="display:flex; flex-direction:column; gap:9px;">
+              <div style="height:7px; background:#F2F4F3; width:100%;"></div>
+              <div style="height:7px; background:#F2F4F3; width:96%;"></div>
+              <div style="height:7px; background:#F2F4F3; width:99%;"></div>
+              <div style="height:7px; background:#F2F4F3; width:64%;"></div>
+            </div>
+            <div style="background:#FCFCFA; border-left:3px solid var(--sec, #055E5D); padding:12px 14px; display:flex; flex-direction:column; gap:6px;">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; color:var(--sec, #055E5D);">SCOPE SUMMARY</span>
+              <div style="height:6px; background:#E4E8E7; width:88%;"></div>
+              <div style="height:6px; background:#E4E8E7; width:72%;"></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:9px; margin-top:4px;">
+              <div style="height:7px; background:#F2F4F3; width:100%;"></div>
+              <div style="height:7px; background:#F2F4F3; width:91%;"></div>
+              <div style="height:7px; background:#F2F4F3; width:47%;"></div>
+            </div>
+          </div>
+          <div style="padding:14px 40px; background:#FCFCFA; border-top:1px solid #E4E8E7; display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:8.5px; letter-spacing:.1em; color:#8A9392;"><span>DELIVERED WITH RELIABILITY</span><span>PAGE 1 / 6</span></div>
+        </div>
+
+        <div style="flex:1; min-width:260px; display:flex; flex-direction:column; gap:14px; padding-top:4px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8A9392;">USAGE NOTES</span>
+          <p style="margin:0; font-size:13.5px; line-height:1.65; color:#4A5453;">Documents stay on canvas white with a single teal rule under the letterhead. Deep teal carries hover, active and emphasis states only — roughly 2% of any layout.</p>
+          <p style="margin:0; font-size:13.5px; line-height:1.65; color:#4A5453;">Reference numbers, dates and quantities are always IBM Plex Mono, so scanned tender packs stay legible at fax-grade quality.</p>
+          <p style="margin:0; font-size:13.5px; line-height:1.65; color:#4A5453;">For Arabic and Urdu material, set the mark unchanged and mirror the layout; the gear is symmetrical and needs no RTL variant.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="grid-column:1 / -1; background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:24px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">07</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Logo on backgrounds</h2>
+        <span style="font-size:13px; color:#6B7574;">Light is the default. The charcoal tile is reserved for app icons, photo overlays and printed merchandise.</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:170px; background:#FCFCFA; border:1px solid #DCE2E1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;">
+            <dc-import name="Sazvar Mark" size="62" hint-size="62px,62px"></dc-import>
+            <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:20px; letter-spacing:.12em; color:#20282B;">SAZVAR</span>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; color:#8A9392;">CANVAS WHITE · PRIMARY</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:170px; background:#F2F4F3; border:1px solid #DCE2E1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;">
+            <dc-import name="Sazvar Mark" size="62" inner="#F2F4F3" hint-size="62px,62px"></dc-import>
+            <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:20px; letter-spacing:.12em; color:#20282B;">SAZVAR</span>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; color:#8A9392;">ENGINEERING GRAY</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:170px; background:var(--accent, #087C7A); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;">
+            <dc-import name="Sazvar Mark" size="62" color="#FFFFFF" inner="#087C7A" ink="#FFFFFF" hint-size="62px,62px"></dc-import>
+            <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:20px; letter-spacing:.12em; color:#FFFFFF;">SAZVAR</span>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; color:#8A9392;">INDUSTRIAL TEAL · KNOCKOUT</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="height:170px; background:#20282B; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;">
+            <dc-import name="Sazvar Mark" size="62" color="#FFFFFF" inner="#20282B" ink="#FFFFFF" hint-size="62px,62px"></dc-import>
+            <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:20px; letter-spacing:.12em; color:#FFFFFF;">SAZVAR</span>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; color:#8A9392;">CHARCOAL · RESTRICTED USE</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="grid-column:1 / -1; background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:24px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">08</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Website cards</h2>
+        <span style="font-size:13px; color:#6B7574;">Four card types: service, metric, capability highlight, and enquiry.</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; align-items:stretch;">
+        <div style="background:#FCFCFA; border:1px solid #DCE2E1; padding:26px 24px 24px; display:flex; flex-direction:column; gap:12px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--accent, #087C7A);">S-03</span>
+          <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:20px; line-height:1.2;">Solar tenders</span>
+          <p style="margin:0; font-size:13.5px; line-height:1.6; color:#4A5453; flex:1;">Sizing, balance-of-system supply and EPC coordination — from pre-qualification to award.</p>
+          <span style="font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:13px; color:var(--accent, #087C7A); border-bottom:2px solid var(--accent, #087C7A); align-self:flex-start; padding-bottom:2px;">View scope</span>
+        </div>
+        <div style="background:#F2F4F3; border:1px solid #DCE2E1; padding:26px 24px 24px; display:flex; flex-direction:column; gap:10px; justify-content:center;">
+          <span style="font-family:'Archivo',sans-serif; font-weight:700; font-size:46px; line-height:1; color:var(--accent, #087C7A);">240+</span>
+          <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:16px;">Tenders compiled</span>
+          <p style="margin:0; font-size:13px; line-height:1.6; color:#4A5453;">Across public and private buyers in Pakistan and the GCC since 2018.</p>
+        </div>
+        <div style="background:#FCFCFA; border:1px solid #DCE2E1; border-top:4px solid var(--sec, #055E5D); padding:24px; display:flex; flex-direction:column; gap:12px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--sec, #055E5D);">AMC</span>
+          <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:20px; line-height:1.2;">Boiler &amp; turbine contracts</span>
+          <div style="display:flex; flex-direction:column; gap:7px; font-size:13px; color:#4A5453;">
+            <span>Scheduled inspection windows</span>
+            <span>Spares planning and stock cover</span>
+            <span>48-hour breakdown response</span>
+          </div>
+        </div>
+        <div style="background:var(--accent, #087C7A); padding:26px 24px 24px; display:flex; flex-direction:column; gap:12px; justify-content:space-between;">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:20px; line-height:1.25; color:#FFFFFF;">Have a tender closing soon?</span>
+            <p style="margin:0; font-size:13.5px; line-height:1.6; color:#FFFFFF;">Send the documents — we return a costed submission plan within two working days.</p>
+          </div>
+          <span style="align-self:flex-start; background:#FFFFFF; color:var(--accent, #087C7A); font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:13.5px; padding:11px 20px;">Request a quote</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="grid-column:1 / -1; background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:24px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">09</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Website hero</h2>
+      </div>
+      <div style="border:1px solid #DCE2E1; background:#FCFCFA;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 34px; border-bottom:1px solid #DCE2E1; background:#FFFFFF;">
+          <div style="display:flex; align-items:center; gap:11px;">
+            <dc-import name="Sazvar Mark" size="34" hint-size="34px,34px"></dc-import>
+            <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:18px; letter-spacing:.12em; color:#20282B;">SAZVAR</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:30px; font-size:14px; color:#39423F;">
+            <span>Services</span>
+            <span style="color:var(--accent, #087C7A); font-weight:600; border-bottom:2px solid var(--accent, #087C7A); padding-bottom:3px;">Tenders</span>
+            <span>AMC</span>
+            <span>Sectors</span>
+            <span>About</span>
+            <span style="background:var(--accent, #087C7A); color:#FFFFFF; font-weight:600; padding:11px 20px;">Request a quote</span>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1.05fr .95fr; gap:48px; padding:60px 34px 54px; align-items:center;">
+          <div style="display:flex; flex-direction:column; gap:22px;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:var(--accent, #087C7A);">PROCUREMENT · TENDERS · AMC</span>
+            <h3 style="margin:0; font-family:'Archivo',sans-serif; font-weight:700; font-size:52px; line-height:1.05; letter-spacing:-0.02em; text-wrap:pretty;">Engineering procurement, delivered with reliability.</h3>
+            <p style="margin:0; font-size:16px; line-height:1.65; color:#39423F; max-width:520px;">We run vendor qualification, costing and bid compilation for civil, solar and mechanical packages — and keep boilers and turbines under contract once they are running.</p>
+            <div style="display:flex; gap:14px; align-items:center;">
+              <span style="background:var(--accent, #087C7A); color:#FFFFFF; font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:15px; padding:15px 28px;">Request a quote</span>
+              <span style="border:1px solid #DCE2E1; color:#20282B; font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:15px; padding:14px 28px;">See our capabilities</span>
+            </div>
+            <div style="display:flex; gap:34px; border-top:1px solid #DCE2E1; padding-top:20px; margin-top:6px;">
+              <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-family:'Archivo',sans-serif; font-weight:700; font-size:24px; color:#20282B;">240+</span><span style="font-size:12.5px; color:#6B7574;">Tenders compiled</span></div>
+              <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-family:'Archivo',sans-serif; font-weight:700; font-size:24px; color:#20282B;">18</span><span style="font-size:12.5px; color:#6B7574;">AMC sites</span></div>
+              <div style="display:flex; flex-direction:column; gap:3px;"><span style="font-family:'Archivo',sans-serif; font-weight:700; font-size:24px; color:#20282B;">PK · GCC</span><span style="font-size:12.5px; color:#6B7574;">Operating regions</span></div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div style="height:340px; background:repeating-linear-gradient(135deg,#EDF1F0 0 10px,#F7F9F8 10px 20px); border:1px solid #DCE2E1; display:flex; align-items:center; justify-content:center;">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.12em; color:#8A9392;">PHOTO · PLANT / TURBINE HALL</span>
+            </div>
+            <div style="display:flex; gap:14px;">
+              <div style="flex:1; height:78px; background:repeating-linear-gradient(135deg,#EDF1F0 0 10px,#F7F9F8 10px 20px); border:1px solid #DCE2E1; display:flex; align-items:center; justify-content:center;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; color:#8A9392;">SITE TEAM</span></div>
+              <div style="flex:1; height:78px; background:repeating-linear-gradient(135deg,#EDF1F0 0 10px,#F7F9F8 10px 20px); border:1px solid #DCE2E1; display:flex; align-items:center; justify-content:center;"><span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; color:#8A9392;">SOLAR ARRAY</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:28px; padding:20px 34px; background:#F2F4F3; border-top:1px solid #DCE2E1;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#6B7574; white-space:nowrap;">TRUSTED BY</span>
+          <div style="flex:1; display:grid; grid-template-columns:repeat(5,1fr); gap:16px;">
+            <div style="height:32px; background:repeating-linear-gradient(135deg,#E3E8E7 0 8px,#EEF1F0 8px 16px);"></div>
+            <div style="height:32px; background:repeating-linear-gradient(135deg,#E3E8E7 0 8px,#EEF1F0 8px 16px);"></div>
+            <div style="height:32px; background:repeating-linear-gradient(135deg,#E3E8E7 0 8px,#EEF1F0 8px 16px);"></div>
+            <div style="height:32px; background:repeating-linear-gradient(135deg,#E3E8E7 0 8px,#EEF1F0 8px 16px);"></div>
+            <div style="height:32px; background:repeating-linear-gradient(135deg,#E3E8E7 0 8px,#EEF1F0 8px 16px);"></div>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:#8A9392; white-space:nowrap;">CLIENT LOGOS · GREYSCALE</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="grid-column:1 / -1; background:#FFFFFF; border:1px solid #DCE2E1; padding:36px 40px 40px; display:flex; flex-direction:column; gap:24px;">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#6B7574;">10</span>
+        <h2 style="margin:0; font-family:'Archivo',sans-serif; font-size:15px; letter-spacing:.08em; text-transform:uppercase;">Website footer</h2>
+        <span style="font-size:13px; color:#6B7574;">Engineering gray, never a dark slab. Teal for links and the contact rule only.</span>
+      </div>
+      <div style="border:1px solid #DCE2E1;">
+        <div style="background:var(--accent, #087C7A); padding:26px 34px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+          <span style="font-family:'Archivo',sans-serif; font-weight:600; font-size:22px; color:#FFFFFF;">Tender closing this month? Send the documents today.</span>
+          <span style="background:#FFFFFF; color:var(--accent, #087C7A); font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:14px; padding:13px 24px;">tenders@sazvar.com</span>
+        </div>
+        <div style="background:#F2F4F3; padding:40px 34px 28px; display:grid; grid-template-columns:1.4fr 1fr 1fr 1.1fr; gap:36px;">
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; align-items:center; gap:11px;">
+              <dc-import name="Sazvar Mark" size="38" inner="#F2F4F3" hint-size="38px,38px"></dc-import>
+              <div style="display:flex; flex-direction:column; gap:3px;">
+                <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:19px; letter-spacing:.12em; color:#20282B;">SAZVAR</span>
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:7.5px; letter-spacing:.2em; color:var(--accent, #087C7A);">DELIVERED WITH RELIABILITY</span>
+              </div>
+            </div>
+            <p style="margin:0; font-size:13px; line-height:1.65; color:#4A5453; max-width:300px;">Procurement outsourcing and engineering tender solutions for civil, solar and mechanical scopes, with annual maintenance contracts for boilers and turbines.</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#8A9392;">SERVICES</span>
+            <span style="font-size:13.5px; color:#39423F;">Procurement outsourcing</span>
+            <span style="font-size:13.5px; color:#39423F;">Civil tenders</span>
+            <span style="font-size:13.5px; color:#39423F;">Solar tenders</span>
+            <span style="font-size:13.5px; color:#39423F;">Mechanical tenders</span>
+            <span style="font-size:13.5px; color:#39423F;">AMC — boilers &amp; turbines</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#8A9392;">COMPANY</span>
+            <span style="font-size:13.5px; color:#39423F;">About Sazvar</span>
+            <span style="font-size:13.5px; color:#39423F;">Sectors served</span>
+            <span style="font-size:13.5px; color:#39423F;">Vendor registration</span>
+            <span style="font-size:13.5px; color:#39423F;">Careers</span>
+            <span style="font-size:13.5px; color:#39423F;">Contact</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#8A9392;">OFFICES</span>
+            <div style="display:flex; flex-direction:column; gap:3px; border-left:2px solid var(--accent, #087C7A); padding-left:12px;">
+              <span style="font-size:13.5px; font-weight:600; color:#20282B;">Lahore, Pakistan</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#4A5453;">Gulberg III, 54660</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#4A5453;">+92 42 000 0000</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:3px; border-left:2px solid var(--accent, #087C7A); padding-left:12px; margin-top:6px;">
+              <span style="font-size:13.5px; font-weight:600; color:#20282B;">Dubai, UAE</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#4A5453;">Business Bay</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#4A5453;">+971 4 000 0000</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:#F2F4F3; border-top:1px solid #DCE2E1; padding:16px 34px; display:flex; justify-content:space-between; align-items:center; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.06em; color:#6B7574; flex-wrap:wrap; gap:12px;">
+          <span>© 2026 SAZVAR PVT LTD · NTN 0000000-0</span>
+          <div style="display:flex; gap:22px;"><span>PRIVACY</span><span>TERMS</span><span>LINKEDIN</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#087C7A&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#087C7A&quot;,&quot;#0E6B7E&quot;,&quot;#14577E&quot;,&quot;#3B4C5A&quot;],&quot;section&quot;:&quot;Palette&quot;},&quot;secondary&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#055E5D&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#055E5D&quot;,&quot;#087C7A&quot;,&quot;#20282B&quot;,&quot;#3B4C5A&quot;],&quot;section&quot;:&quot;Palette&quot;},&quot;altTagline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;None&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;None&quot;,&quot;Quality Supply, On Time&quot;,&quot;Tenders Handled End to End&quot;,&quot;Equipment Running, Contracts Kept&quot;],&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#087C7A';
+    const secondary = this.props.secondary ?? '#055E5D';
+    const rec = this.props.altTagline ?? 'None';
+    return {
+      accent, secondary,
+      accentHex: accent.toUpperCase(),
+      secondaryHex: secondary.toUpperCase(),
+      rec2: rec === 'Quality Supply, On Time',
+      rec3: rec === 'Tenders Handled End to End',
+      rec4: rec === 'Equipment Running, Contracts Kept'
+    };
+  }
+}
+</script>
+</body>
+</html>

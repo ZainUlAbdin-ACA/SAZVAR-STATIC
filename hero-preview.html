@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hero Preview | Sazvar</title>
+<meta name="description" content="Standalone preview of a new dark hero layout for Sazvar, inspired by the cemengg.com reference." />
+<link rel="icon" href="assets/img/sazvar-mark.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="assets/css/style.css" />
+<style>
+  /* ============================================================
+     PREVIEW-ONLY STYLES for this new dark hero concept.
+     Nothing here touches style.css or index.html yet — this file
+     is just for review. If approved, this block gets folded into
+     style.css and the markup gets moved onto the real homepage.
+     ============================================================ */
+
+  :root {
+    --hero-dark-1: #06201f;   /* near-black teal, top of gradient */
+    --hero-dark-2: #0a3230;   /* deep teal, bottom of gradient */
+    --accent: #2fe6d6;        /* bright teal/cyan accent — brand colour, not white, not red */
+    --accent-deep: #14b8a9;
+  }
+
+  .preview-banner {
+    background: #fff4d6;
+    color: #4a3b06;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-bottom: 1px solid #e8d9a3;
+  }
+
+  .hero-stack-wrap {
+    position: relative;
+    /* JS sets this to hero's own height + the site-band's sticky panel height,
+       so the hero stays pinned for exactly as long as the site-band's scene
+       takes to slide up and fully cover it */
+  }
+  .hero-dark {
+    background: linear-gradient(160deg, var(--hero-dark-1) 0%, var(--hero-dark-2) 100%);
+    padding: 64px 0 56px;
+    overflow: hidden;
+  }
+  /* Stack effect only above the tablet/desktop breakpoint (matches the nav's own
+     min-width:860px) — on narrow screens the hero's single-column content runs
+     taller than one viewport, so pinning it would hide content until it
+     flashed by during release. Mobile just scrolls normally instead. */
+  @media (min-width: 860px) {
+    .hero-dark {
+      position: sticky;
+      top: 79px; /* pins just below the sticky site header while the next section stacks over it */
+      z-index: 1;
+    }
+  }
+  .hero-dark .container {
+    display: grid;
+    gap: 48px;
+    transition: filter 1s ease, transform 1s ease, opacity 1s ease;
+  }
+  @media (min-width: 960px) {
+    .hero-dark .container {
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+    }
+  }
+  /* As the site-band scrolls into view and starts covering the pinned hero,
+     the hero content recedes (dims + shrinks slightly) so the transition
+     reads as one layer taking over the screen, not just extra scrolling */
+  #hero-stack-wrap.stack-covering .hero-dark .container {
+    filter: brightness(0.5) saturate(0.75);
+    transform: scale(0.96);
+    opacity: 0.75;
+  }
+
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(47, 230, 214, 0.12);
+    border: 1px solid rgba(47, 230, 214, 0.35);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .badge-pill::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  .hero-dark h1 {
+    color: #fff;
+    font-size: clamp(34px, 4.6vw, 56px);
+    margin-bottom: 22px;
+  }
+  .hero-dark h1 .accent-underline {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px;
+  }
+  .hero-dark .hero-slogan {
+    color: var(--accent);
+    font-size: 19px;
+    margin-bottom: 14px;
+  }
+  .hero-dark p.lead {
+    color: #b9cac8;
+    font-size: 18px;
+    max-width: 520px;
+    margin-bottom: 30px;
+  }
+
+  .hero-dark .button-row {
+    margin: 0 0 34px;
+  }
+  .hero-dark .btn-accent {
+    background: var(--accent);
+    color: #06201f;
+    font-weight: 800;
+  }
+  .hero-dark .btn-accent:hover {
+    background: var(--accent-deep);
+  }
+  .hero-dark .btn-ghost {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+  }
+  .hero-dark .btn-ghost:hover {
+    border-color: #fff;
+  }
+
+  .hero-dark .hero-footnote {
+    color: #8fa6a3;
+  }
+  .hero-dark .status-dot {
+    background: var(--accent);
+  }
+
+  /* ---- Crane visual, moved here from the scroll story below so that story
+     section can be one clean, uninterrupted "site build" sequence ---- */
+  .hero-crane-visual {
+    position: relative;
+    transform: translateX(35%);
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.9s ease-out;
+  }
+  .hero-crane-visual.in-view {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  .hero-crane-visual .crane-img {
+    width: 100%;
+    display: block;
+  }
+
+  /* ---- Stats row (honest numbers — no invented track record) ---- */
+  .stats-dark {
+    background: #08302d;
+    border-top: 1px solid rgba(47, 230, 214, 0.18);
+  }
+  .stats-dark .value-grid span {
+    color: var(--accent);
+  }
+  .stats-dark .value-grid p {
+    color: #cfe6e3;
+  }
+
+  /* This page's wordmark is wider (bilingual), so size the tagline up to match instead of stretching it */
+  .site-header .logo-slogan {
+    font-size: 15px;
+  }
+
+  .logo-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Ensures everything aligns perfectly to the left edge */
+  }
+
+  .company-name {
+    display: block;        /* Forces the span to act like a block element */
+    margin: 0;
+    padding: 0;
+    /* Keep your existing font styles here */
+  }
+
+  .tagline {
+    display: block;        /* Forces the tagline down directly underneath */
+    margin-top: 4px;       /* Gives exact spacing below the company name */
+    white-space: nowrap;   /* Prevents the tagline from wrapping into two lines */
+    /* Keep your existing font styles here */
+  }
+
+  /* ---- "One site, everything happening" scroll story ----
+     The plant assembles piece by piece, then a truck drives in with the next
+     chapter, then a site office appears with the last — same camera, same
+     scene the whole time. .site-band is made tall by JS so its inner sticky
+     panel (.site-stage-sticky) holds still on screen while the user scrolls
+     through the three chapters; the rounded top + shadow read as this band's
+     leading edge lifting over and casting a shadow onto the hero still
+     pinned beneath it during the initial cover. */
+  .site-band {
+    background: var(--hero-dark-1);
+    border-top: 2px solid rgba(47, 230, 214, 0.32);
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -55px 80px -24px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 2;
+  }
+  .site-stage-sticky {
+    overflow: hidden;
+  }
+  @media (min-width: 860px) {
+    .site-stage-sticky {
+      position: sticky;
+      top: 79px;
+    }
+  }
+  .site-stage {
+    position: relative;
+    height: 300px;
+    padding: 40px 0 70px;
+    /* Soft ambient glow under each rig so the space between them reads as a
+       lit stage floor rather than empty background */
+    background:
+      radial-gradient(ellipse 46% 50% at 22% 90%, rgba(47, 230, 214, 0.14), transparent 62%),
+      radial-gradient(ellipse 42% 46% at 54% 92%, rgba(47, 230, 214, 0.11), transparent 60%),
+      radial-gradient(ellipse 40% 46% at 84% 90%, rgba(47, 230, 214, 0.1), transparent 60%);
+  }
+  @media (min-width: 720px) {
+    .site-stage {
+      height: 480px;
+    }
+  }
+  /* A single "site floor" line ties every rig together as one scene instead
+     of separate objects with dead space between them */
+  .site-stage::after {
+    content: "";
+    position: absolute;
+    left: 2%;
+    right: 2%;
+    bottom: 14px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(47, 230, 214, 0.4) 12%,
+      rgba(47, 230, 214, 0.55) 50%,
+      rgba(47, 230, 214, 0.4) 88%,
+      transparent 100%
+    );
+  }
+
+  /* Chapter headline, crossfading between the three stages */
+  .site-headline-stack {
+    position: absolute;
+    top: 4px;
+    left: 4%;
+    right: 4%;
+    text-align: center;
+    z-index: 4;
+    /* Mobile shows the whole site already assembled (no pinned scrubbing
+       through chapters), so all three headlines would otherwise stack and
+       overlap illegibly — the assembled scene tells the story on its own */
+    display: none;
+  }
+  @media (min-width: 860px) {
+    .site-headline-stack {
+      display: block;
+    }
+  }
+  .site-headline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    color: #fff;
+    font-weight: 800;
+    font-size: clamp(19px, 3vw, 28px);
+    line-height: 1.3;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .site-stage.stage-1 .site-headline.h1,
+  .site-stage.stage-2 .site-headline.h2,
+  .site-stage.stage-3 .site-headline.h3 {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Chapter 1 — the plant assembles piece by piece */
+  .plant-rig {
+    position: absolute;
+    left: 3%;
+    bottom: 0;
+    width: 320px;
+    max-width: 48vw;
+    aspect-ratio: 1071 / 669;
+    z-index: 2;
+  }
+  @media (min-width: 720px) {
+    .plant-rig {
+      width: 480px;
+      max-width: 36vw;
+    }
+  }
+  .plant-piece {
+    position: absolute;
+    display: block;
+    width: auto;
+    height: auto;
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.6s ease-out;
+  }
+  .plant-piece-1 {
+    left: 0.093%;
+    top: 0.149%;
+    width: 33.240%;
+    height: 99.701%;
+    transform: translate(-40px, 40px);
+  }
+  .plant-piece-2 {
+    left: 33.333%;
+    top: 0.299%;
+    width: 33.333%;
+    height: 99.552%;
+    transform: translateY(-50px);
+  }
+  .plant-piece-3 {
+    left: 66.667%;
+    top: 43.946%;
+    width: 33.240%;
+    height: 50.075%;
+    transform: translate(40px, 30px);
+  }
+  .plant-piece.in-view {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  .plant-piece-1.in-view { transition-delay: 0.1s; }
+  .plant-piece-2.in-view { transition-delay: 0.4s; }
+  .plant-piece-3.in-view { transition-delay: 0.7s; }
+
+  /* Chapter 2 — a delivery truck drives in along the site floor */
+  .truck-rig {
+    position: absolute;
+    bottom: 6px;
+    left: 46%;
+    width: 190px;
+    max-width: 30vw;
+    aspect-ratio: 1232 / 516;
+    z-index: 3;
+    opacity: 0;
+    transform: translateX(-260%);
+    transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.5s ease-out;
+  }
+  @media (min-width: 720px) {
+    .truck-rig {
+      width: 260px;
+      max-width: 21vw;
+    }
+  }
+  .truck-rig img {
+    width: 100%;
+    display: block;
+  }
+  .site-stage.stage-2 .truck-rig,
+  .site-stage.stage-3 .truck-rig {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Chapter 3 — a small site office with rooftop solar settles into place */
+  .office-rig {
+    position: absolute;
+    bottom: 0;
+    right: 4%;
+    width: 150px;
+    max-width: 26vw;
+    aspect-ratio: 1005 / 694;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(45px) scale(0.9);
+    transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.6s ease-out;
+  }
+  @media (min-width: 720px) {
+    .office-rig {
+      width: 210px;
+      max-width: 18vw;
+    }
+  }
+  .office-rig img {
+    width: 100%;
+    display: block;
+  }
+  .site-stage.stage-3 .office-rig {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .hook-banner {
+    position: absolute;
+    left: 22%;
+    top: 62%;
+    width: 260px;
+    margin-left: -130px;
+    transform-origin: 50% 4px;
+    animation: bannerSwing 3.6s ease-in-out infinite;
+  }
+  @keyframes bannerSwing {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
+  }
+  .sling-lines {
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: visible;
+  }
+  .sling-lines line {
+    stroke: #a9b8b6;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+  .sling-lines circle {
+    fill: #c9d5d3;
+  }
+  .banner-flag {
+    position: relative;
+    margin-top: -6px;
+    background: #ffffff;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(6, 32, 31, 0.04) 0 3px,
+      transparent 3px 8px
+    );
+    outline: 2px dashed rgba(6, 32, 31, 0.25);
+    outline-offset: -7px;
+    color: var(--hero-dark-1);
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 1.35;
+    text-align: center;
+    padding: 14px 16px;
+    border-radius: 3px;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.4);
+  }
+  .grommet {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #0c2c2a;
+    border: 2px solid rgba(255, 255, 255, 0.55);
+  }
+  .grommet.tl { top: 7px; left: 7px; }
+  .grommet.tr { top: 7px; right: 7px; }
+  .grommet.bl { bottom: 7px; left: 7px; }
+  .grommet.br { bottom: 7px; right: 7px; }
+  @media (min-width: 720px) {
+    .hook-banner {
+      width: 300px;
+      margin-left: -150px;
+    }
+    .banner-flag {
+      font-size: 22px;
+      padding: 16px 18px;
+    }
+  }
+
+  /* ---- Mobile nav panel needs dark styling to match this page's dark header ---- */
+  .site-header .primary-nav {
+    background: var(--hero-dark-1);
+    border-bottom: 1px solid rgba(47, 230, 214, 0.18);
+  }
+  .site-header .primary-nav a {
+    color: #fff;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+  }
+  @media (min-width: 860px) {
+    .site-header .primary-nav {
+      background: none;
+      border-bottom: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-banner">
+  Preview only — not linked from the live site. Compare this hero against the current homepage before we decide anything.
+</div>
+
+<header class="site-header" style="background:var(--hero-dark-1); border-bottom:1px solid rgba(47,230,214,0.18);">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="Sazvar home — Built On Reliability">
+      <img src="assets/img/sazvar-mark.svg" width="42" height="42" alt="" />
+      <span class="logo-text-container">
+        <span class="logo-word company-name" style="color:#fff;white-space:nowrap">SAZVAR | <bdi lang="ur" style="font-weight:600">سازوار</bdi></span>
+        <span class="logo-slogan tagline" style="color:var(--accent)">Built On Reliability</span>
+      </span>
+    </a>
+    <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" style="color:#fff;border-color:rgba(255,255,255,0.3)">
+      Menu ☰
+    </button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
+      <a href="index.html#services" style="color:#fff">Services</a>
+      <a href="index.html#sectors" style="color:#fff">Sectors</a>
+      <a href="index.html#process" style="color:#fff">Process</a>
+      <a href="about.html" style="color:#fff">About</a>
+      <a href="contact.html" class="btn btn-accent">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero-stack-wrap" id="hero-stack-wrap">
+<section class="hero-dark">
+  <div class="container">
+    <div>
+      <h1>Solutions That Move Your Business <span class="accent-underline">Forward.</span></h1>
+      <p class="hero-slogan">One Reliable Partner for Industrial Engineering, Procurement &amp; Corporate Solutions.</p>
+      <p class="lead">Sazvar provides integrated B2B solutions across procurement, civil construction, heavy logistics, mechanical engineering, and corporate operations. From sourcing specialized equipment and managing plant shutdowns to executing institutional construction and bulk material transportation, we deliver end-to-end project success through one single, accountable team.</p>
+      <div class="button-row">
+        <a href="contact.html" class="btn btn-accent">Contact Us</a>
+        <a href="about.html" class="btn btn-ghost">See How We Work</a>
+      </div>
+    </div>
+
+    <div class="hero-crane-visual" id="hero-crane-visual">
+      <img src="assets/img/hero/crane.png" class="crane-img" alt="Construction crane, representing Sazvar's engineering and construction capability" />
+      <div class="hook-banner">
+        <svg class="sling-lines" viewBox="0 0 260 50" preserveAspectRatio="none">
+          <line x1="130" y1="0" x2="14" y2="50" />
+          <line x1="130" y1="0" x2="246" y2="50" />
+          <line x1="130" y1="0" x2="60" y2="50" />
+          <line x1="130" y1="0" x2="200" y2="50" />
+          <circle cx="130" cy="2" r="4" />
+        </svg>
+        <div class="banner-flag">
+          <span class="grommet tl"></span><span class="grommet tr"></span>
+          Project of<br />DR Enterprise
+          <span class="grommet bl"></span><span class="grommet br"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="site-band" id="site-band">
+  <div class="site-stage-sticky" id="site-stage-sticky">
+    <div class="container site-stage" id="site-stage">
+      <div class="site-headline-stack">
+        <p class="site-headline h1">We Engineer And Build The Site.</p>
+        <p class="site-headline h2">We Source And Move Every Shipment.</p>
+        <p class="site-headline h3">And Keep The Business Running.</p>
+      </div>
+      <div class="plant-rig" id="plant-rig">
+        <img src="assets/img/hero/plant-piece-1.png" class="plant-piece plant-piece-1" id="plant-piece-1" alt="" />
+        <img src="assets/img/hero/plant-piece-2.png" class="plant-piece plant-piece-2" id="plant-piece-2" alt="Small industrial plant assembling on site" />
+        <img src="assets/img/hero/plant-piece-3.png" class="plant-piece plant-piece-3" id="plant-piece-3" alt="" />
+      </div>
+      <div class="truck-rig" id="truck-rig">
+        <img src="assets/img/hero/delivery-truck.png" alt="Delivery truck arriving with materials and equipment" />
+      </div>
+      <div class="office-rig" id="office-rig">
+        <img src="assets/img/hero/site-office.png" alt="Site office with rooftop solar panels" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="value-strip stats-dark">
+  <div class="container value-grid">
+    <div><span>5</span><p>Core Service Lines</p></div>
+    <div><span>1</span><p>Dedicated Coordinator Per Project</p></div>
+    <div><span>PK → GCC</span><p>Growth Roadmap</p></div>
+    <div><span>0</span><p>Layers Between You and Suppliers</p></div>
+  </div>
+</section>
+
+<section class="section" style="text-align:center">
+  <div class="container">
+    <h2>That's the hero — nothing below this line is final.</h2>
+    <p style="max-width:600px;margin:0 auto 20px">This page only exists so we can look at the new hero side-by-side with the current homepage. Once you're happy with the direction (colours, headline, stats, scroll story), I'll move this onto index.html properly.</p>
+  </div>
+</section>
+
+<script src="assets/js/main.js"></script>
+<script>
+  // Stretch the tagline (letter-spacing) so it always spans exactly as wide as
+  // the "SAZVAR | سازوار" wordmark above it, no matter what font the browser
+  // actually renders (Windows/Segoe UI measures differently than this preview did).
+  (function () {
+    function matchTaglineWidth() {
+      var word = document.querySelector(".logo-word");
+      var slogan = document.querySelector(".logo-slogan");
+      if (!word || !slogan) return;
+      slogan.style.letterSpacing = "normal";
+      var targetWidth = word.getBoundingClientRect().width;
+      var naturalWidth = slogan.getBoundingClientRect().width;
+      var text = slogan.textContent.trim();
+      var gaps = text.length - 1;
+      if (gaps <= 0 || targetWidth <= naturalWidth) return;
+      var extraPerChar = (targetWidth - naturalWidth) / gaps;
+      slogan.style.letterSpacing = extraPerChar + "px";
+    }
+    window.addEventListener("load", matchTaglineWidth);
+    window.addEventListener("resize", matchTaglineWidth);
+  })();
+
+  // The crane arrives in the hero itself shortly after the page loads —
+  // no need to wait for a scroll trigger since it's already on screen.
+  (function () {
+    function revealCrane() {
+      var el = document.getElementById("hero-crane-visual");
+      if (el) el.classList.add("in-view");
+    }
+    if (document.readyState === "complete") {
+      setTimeout(revealCrane, 250);
+    } else {
+      window.addEventListener("load", function () {
+        setTimeout(revealCrane, 250);
+      });
+    }
+  })();
+
+  // Dim + shrink the hero content while the site-band's scene is covering
+  // it, so the transition reads as one layer taking over the screen. This
+  // toggles both ways (not a one-shot add) so scrolling back up past the
+  // trigger point restores the hero to full brightness instead of leaving
+  // it permanently dimmed/hazy.
+  (function () {
+    var wrap = document.getElementById("hero-stack-wrap");
+    var stickyPanel = document.getElementById("site-stage-sticky");
+    if (!wrap || !stickyPanel) return;
+    if (!("IntersectionObserver" in window)) return;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          wrap.classList.toggle("stack-covering", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(stickyPanel);
+  })();
+
+  // Two nested sticky-stacks: (1) the hero stays pinned exactly long enough
+  // for the site-band's sticky panel to rise up and fully cover it, then (2)
+  // that panel itself stays pinned — camera never moves — for extra scroll
+  // room while three chapters (plant, then truck, then office) reveal over it.
+  (function () {
+    function setStackHeight() {
+      var wrap = document.getElementById("hero-stack-wrap");
+      var hero = document.querySelector(".hero-dark");
+      var band = document.getElementById("site-band");
+      var stickyPanel = document.getElementById("site-stage-sticky");
+      if (!wrap || !hero || !band || !stickyPanel) return;
+      if (window.innerWidth < 860) {
+        // mobile: no pinning at all, let everything size and scroll naturally
+        wrap.style.height = "";
+        band.style.height = "";
+        return;
+      }
+      wrap.style.height = hero.offsetHeight + stickyPanel.offsetHeight + "px";
+      // Extra scroll room for the truck (chapter 2) and office (chapter 3)
+      // reveals to play out while the scene holds still on screen.
+      band.style.height = stickyPanel.offsetHeight + window.innerHeight * 1.6 + "px";
+    }
+    window.addEventListener("load", setStackHeight);
+    window.addEventListener("resize", setStackHeight);
+  })();
+
+  // The three chapters share one "current stage" state so their headlines
+  // crossfade cleanly (only one of stage-1/2/3 is ever applied at once) —
+  // chapter 1 (plant assembling) is a one-shot reveal triggered by scrolling
+  // the scene into view; chapters 2 and 3 (truck, then office) are driven
+  // continuously by how far the user has scrolled through the site-band's
+  // pinned range, so scrolling back up reverts them too.
+  (function () {
+    var plantPieces = document.querySelectorAll(".plant-piece");
+    var stage = document.getElementById("site-stage");
+    var stickyPanel = document.getElementById("site-stage-sticky");
+    var band = document.getElementById("site-band");
+    if (!stage || !stickyPanel || !band) return;
+
+    function setStage(n) {
+      stage.classList.remove("stage-1", "stage-2", "stage-3");
+      stage.classList.add("stage-" + n);
+    }
+
+    var assembled = false;
+    function assemblePlant() {
+      if (assembled) return;
+      assembled = true;
+      plantPieces.forEach(function (piece) {
+        piece.classList.add("in-view");
+      });
+      // On mobile there's no pinned scroll-through for chapters 2 and 3 (no
+      // room to scrub a pinned scene on a small screen), so just settle the
+      // whole site into its finished state right away.
+      if (window.innerWidth < 860) {
+        setStage(1);
+        stage.classList.add("stage-2", "stage-3");
+      } else {
+        // Sync to wherever the user actually is right now rather than
+        // assuming stage 1 — a fast scroll can reach the sticky panel's 30%
+        // visibility trigger and pass the chapter-2/3 thresholds together.
+        updateProgress();
+      }
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      assemblePlant();
+    } else {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              assemblePlant();
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(stickyPanel);
+    }
+
+    var ticking = false;
+    function updateProgress() {
+      ticking = false;
+      if (!assembled || window.innerWidth < 860) return;
+      var scrollableRange = band.offsetHeight - stickyPanel.offsetHeight;
+      if (scrollableRange <= 0) return;
+      var rect = band.getBoundingClientRect();
+      var stickyTopOffset = 79; // matches .site-stage-sticky's sticky "top"
+      var progress = (stickyTopOffset - rect.top) / scrollableRange;
+      progress = Math.max(0, Math.min(1, progress));
+      setStage(progress > 0.65 ? 3 : progress > 0.3 ? 2 : 1);
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateProgress);
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    window.addEventListener("load", updateProgress);
+  })();
+</script>
+</body>
+</html>
