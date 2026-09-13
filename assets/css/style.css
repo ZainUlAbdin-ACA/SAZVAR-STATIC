@@ -1044,7 +1044,8 @@ svg {
 .site-stage.stage-1 .site-headline.h1,
 .site-stage.stage-2 .site-headline.h2,
 .site-stage.stage-3 .site-headline.h3,
-.site-stage.stage-4 .site-headline.h4 {
+.site-stage.stage-4 .site-headline.h4,
+.site-stage.stage-5 .site-headline.h4 {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1088,7 +1089,11 @@ svg {
   aspect-ratio: 1232 / 516;
   z-index: 3;
   opacity: calc(var(--truck-in-progress, 1) * (1 - var(--truck-out-progress, 0)));
-  transform: translateX(calc((1 - var(--truck-in-progress, 1)) * -160% + var(--truck-out-progress, 0) * 160%));
+  /* Truck art faces left, so it always travels right-to-left: it arrives
+     from off-screen right (--truck-in-progress 0), parks at 0%, then keeps
+     driving the same direction off-screen left as --truck-out-progress
+     rises to 1 — one continuous leftward journey, not a reverse-and-return. */
+  transform: translateX(calc((1 - var(--truck-in-progress, 1)) * 160% + var(--truck-out-progress, 0) * -160%));
 }
 @media (min-width: 960px) {
   .truck-rig {
@@ -1126,6 +1131,97 @@ svg {
   width: 100%;
   height: auto;
   display: block;
+}
+/* Small "Sazvar Site" signboard planted at the office's front-left corner —
+   nested inside .office-rig so it fades/rises in and out together with the
+   office, with no extra JS or progress variable of its own. */
+.office-rig .site-sign-img {
+  position: absolute;
+  left: -13%;
+  bottom: 0;
+  width: 26%;
+  height: auto;
+  z-index: 1;
+}
+@media (min-width: 960px) {
+  .office-rig .site-sign-img {
+    left: -32px;
+    width: 60px;
+  }
+}
+
+/* Closing beat: the engineer and the plant owner shake on it, once the
+   truck has fully left the frame (see --handshake-progress in
+   stack-scroll.js — it only starts rising after --truck-out-progress
+   reaches 1). Sits where the truck used to be, roughly centered. */
+.handshake-rig {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  width: 16%;
+  aspect-ratio: 464 / 680;
+  z-index: 3;
+  opacity: var(--handshake-progress, 1);
+  transform: translate(-50%, calc((1 - var(--handshake-progress, 1)) * 30px));
+}
+@media (min-width: 960px) {
+  .handshake-rig {
+    bottom: 40px;
+    width: 130px;
+    max-width: 11vw;
+  }
+}
+.handshake-rig img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.chat-bubble {
+  position: absolute;
+  top: -6%;
+  width: 130px;
+  padding: 7px 10px;
+  background: #ffffff;
+  color: #0b2726;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  opacity: var(--handshake-progress, 1);
+  transition: opacity 0.3s ease;
+}
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #ffffff;
+}
+.chat-engineer {
+  right: 100%;
+  margin-right: 10px;
+}
+.chat-engineer::after {
+  right: 14px;
+}
+.chat-owner {
+  left: 100%;
+  margin-left: 10px;
+}
+.chat-owner::after {
+  left: 14px;
+}
+@media (max-width: 959px) {
+  .chat-bubble {
+    width: 108px;
+    font-size: 10.5px;
+    padding: 6px 8px;
+  }
 }
 .hook-banner {
   position: absolute;

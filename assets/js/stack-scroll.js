@@ -58,7 +58,7 @@
       panel.style.setProperty("--stack-shade", (cover * 0.13).toFixed(4));
     });
     if (stage && storyIndex >= 0) {
-      // Four chapters, driven by one 0..1 progress value: on desktop this
+      // Five chapters, driven by one 0..1 progress value: on desktop this
       // rides the same panel-cover math as the rest of the page-wide
       // stacking (untouched below); on phones/tablets — where that
       // page-wide stacking stays off — it instead reads how far we've
@@ -76,14 +76,19 @@
         // Mirrors the sticky panel's own height: calc(100svh - header).
         progress = clamp((scroll - bandGeo.start) / Math.max(1, bandGeo.height - viewport));
       }
-      stage.style.setProperty("--plant-progress", clamp(progress / 0.3).toFixed(4));
-      stage.style.setProperty("--truck-in-progress", clamp((progress - 0.2) / 0.3).toFixed(4));
-      stage.style.setProperty("--office-progress", clamp((progress - 0.45) / 0.25).toFixed(4));
-      stage.style.setProperty("--truck-out-progress", clamp((progress - 0.68) / 0.28).toFixed(4));
-      stage.classList.toggle("stage-1", progress < 0.3);
-      stage.classList.toggle("stage-2", progress >= 0.3 && progress < 0.5);
-      stage.classList.toggle("stage-3", progress >= 0.5 && progress < 0.7);
-      stage.classList.toggle("stage-4", progress >= 0.7);
+      // Plant settles, truck arrives, office (+ sign) settles, truck
+      // leaves, then — only once the truck is fully gone — the engineer
+      // and plant owner shake on it.
+      stage.style.setProperty("--plant-progress", clamp(progress / 0.22).toFixed(4));
+      stage.style.setProperty("--truck-in-progress", clamp((progress - 0.18) / 0.22).toFixed(4));
+      stage.style.setProperty("--office-progress", clamp((progress - 0.38) / 0.2).toFixed(4));
+      stage.style.setProperty("--truck-out-progress", clamp((progress - 0.55) / 0.2).toFixed(4));
+      stage.style.setProperty("--handshake-progress", clamp((progress - 0.78) / 0.22).toFixed(4));
+      stage.classList.toggle("stage-1", progress < 0.22);
+      stage.classList.toggle("stage-2", progress >= 0.22 && progress < 0.4);
+      stage.classList.toggle("stage-3", progress >= 0.4 && progress < 0.58);
+      stage.classList.toggle("stage-4", progress >= 0.58 && progress < 0.78);
+      stage.classList.toggle("stage-5", progress >= 0.78);
     }
   }
 
