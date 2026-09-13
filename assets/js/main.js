@@ -124,49 +124,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Hero scroll-story fallback: stack-scroll.js only scrubs the plant/
-  // truck/office reveal to scroll position on wide-and-tall desktop
-  // windows (see its "desktop" media query — roughly 960x600+). Below
-  // that, body never gets the "stack-enabled" class, so play a simple
-  // one-shot "assembling" reveal instead once the scene scrolls into
-  // view, rather than leaving it static.
-  var siteStage = document.getElementById("site-stage");
-  if (siteStage) {
-    var plantRig = siteStage.querySelector(".plant-rig");
-    var truckRig = siteStage.querySelector(".truck-rig");
-    var officeRig = siteStage.querySelector(".office-rig");
-    var rigTimers = [];
-
-    var revealRigs = function () {
-      if (document.body.classList.contains("stack-enabled")) return;
-      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var add = function (el, delay) {
-        if (!el) return;
-        if (reduced) { el.classList.add("in-view"); return; }
-        rigTimers.push(window.setTimeout(function () { el.classList.add("in-view"); }, delay));
-      };
-      add(plantRig, 100);
-      add(truckRig, 500);
-      add(officeRig, 900);
-    };
-
-    if ("IntersectionObserver" in window) {
-      var rigObserver = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              revealRigs();
-              rigObserver.disconnect();
-            }
-          });
-        },
-        { threshold: 0.3 },
-      );
-      rigObserver.observe(siteStage);
-    } else {
-      revealRigs();
-    }
-  }
+  // Note: the plant/truck/office scroll story (assemble, truck arrives,
+  // office appears, truck leaves) is entirely driven by stack-scroll.js,
+  // on every screen size — see the --plant-progress/--truck-in-progress/
+  // --office-progress/--truck-out-progress custom properties it sets on
+  // #site-stage each scroll frame.
 
   // Contact form: prepare a mailto draft. No backend is connected yet,
   // so this deliberately does not claim the message was sent.
