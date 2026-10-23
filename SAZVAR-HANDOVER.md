@@ -2,11 +2,11 @@
 
 **Read this file first in any new session (ChatGPT, Claude, or otherwise).**
 
-Last updated: 2026-09-12.
+Last updated: 2026-10-23 (after a site audit).
 
 ## This is the live project
 
-`E:\WEBSITE\SAZVAR\sazvar-static\` is the **only active codebase** for sazvar.com.
+`E:\WEBSITE\SAZVAR\sazvar-static\` is the **only active codebase** for sazvar.com. It is **live** at https://sazvar.com (Hostinger, live since about 2026-09-13).
 
 There is also `E:\WEBSITE\SAZVAR\sazvar-website\` — an earlier Next.js scaffold that was **abandoned** before real content was built into it. Its own `SAZVAR-HANDOVER.md` describes that abandoned attempt only; ignore it. Do not resume or reference that project unless the user explicitly asks to revisit the Next.js approach.
 
@@ -17,33 +17,41 @@ There is also `E:\WEBSITE\SAZVAR\sazvar-website\` — an earlier Next.js scaffol
 - Sazvar is a Pakistan-based (Karachi) B2B solutions company: industrial engineering & plant maintenance, commercial & utility-scale solar, supply chain & heavy logistics, civil/infrastructure/facility services, procurement & sourcing, and corporate & financial solutions.
 - Fully independent business — no ownership/branding link to DR Enterprise or HLM Consultants (the owner's separate finance consultancy).
 - Currently serving Pakistan; already taking enquiries from GCC markets (UAE, Saudi Arabia, Qatar).
-- Domain: sazvar.com (purchased, not yet pointed at a live deployment — see "Deployment status" below).
-- Owner: ZainUlAbdin (zainca02@gmail.com).
+- Domain: sazvar.com — live on Hostinger. Mailbox: info@sazvar.com (Hostinger email).
+- Owner: ZainUlAbdin.
 
 ## Tech stack
 
-Plain HTML/CSS/JS. No framework, no build step, no `npm install` needed to preview or edit. Every page is a static `.html` file that can be opened directly in a browser.
+Plain HTML/CSS/JS pages, no framework and no build step. The **only** server-side code is `contact.php` (the contact form), which runs on Hostinger's PHP (8.3 as of the 2026-10-23 audit) and sends mail with a bundled copy of PHPMailer. No database.
+
+Git: this folder is a git repo, remote `https://github.com/ZainUlAbdin-ACA/SAZVAR-STATIC.git` (branch `main`). Confirm with the user how changes reach Hostinger (git deploy vs. File Manager upload) before assuming either.
 
 ## File structure
 
 ```
 sazvar-static/
-├── index.html            Homepage
-├── about.html            About + Our Leadership
-├── contact.html          Contact form (mailto: fallback only, see "Open items")
-├── hero-preview.html      Legacy comparison page used while designing the dark hero — not linked from the live site, safe to ignore/delete
-├── README.md              Quick-start editing/deploy notes (shorter, less detailed than this file)
+├── index.html             Homepage
+├── about.html             About + Our Leadership
+├── faq.html               FAQs
+├── contact.html           Contact form (posts to contact.php)
+├── 404.html               Branded "page not found" (root-relative links, noindex)
+├── contact.php            Form handler — validates, then emails info@sazvar.com
+├── smtp-config.sample.php Template for smtp-config.php (server-only, never in git)
+├── lib/phpmailer/         PHPMailer 6.9.3 (Exception.php, PHPMailer.php, SMTP.php)
+├── robots.txt, sitemap.xml
+├── .htaccess              Caching, security headers, 404 page, blocks internal files
+├── hero-preview.html      Old design-comparison page — blocked from the web, kept as reference
+├── IMAGES/, Brand Identity/  Raw source images and brand files — blocked from the web
+├── README.md              Short quick-start notes
 ├── SAZVAR-HANDOVER.md     This file
 └── assets/
-    ├── css/style.css      All styling, single file
-    ├── js/main.js         Mobile menu, services dropdown, stats count-up animation, contact form handler
-    ├── js/stack-scroll.js Homepage-only stacked-section scroll effect (see "Page-by-page" below)
-    └── img/
-        ├── sazvar-mark.svg, sazvar-primary.svg   Logo
-        ├── hero/           Crane, plant pieces, truck, site-office renders used in the homepage scroll story
-        ├── services/       Card + thumbnail images per service category (see naming below)
-        └── leadership/     Headshots for the Our Leadership section
+    ├── css/style.css (+ style.min.css — the pages load the .min version)
+    ├── js/main.js (+ .min)          Mobile menu, services dropdown, stats count-up, contact form
+    ├── js/stack-scroll.js (+ .min)  Homepage stacked-section scroll effect
+    └── img/                         Logo, hero/, services/, sectors/, leadership/
 ```
+
+**Edit the non-minified file, then regenerate the `.min` file and bump its `?v=` number in every HTML page** — the pages load the `.min` versions, and `.htaccess` caches CSS/JS/images for a year.
 
 Service image naming follows the category slug: `<slug>-card.jpg` (services grid on the homepage) and `<slug>-thumb.jpg` (nav dropdown). Current slugs: `engineering-shutdown-maintenance`, `commercial-utility-scale-solar`, `supply-chain-heavy-logistics`, `civil-infrastructure-facility-services`, `procurement-sourcing-solutions`, `corporate-financial-solutions`.
 
@@ -53,20 +61,42 @@ Service image naming follows the category slug: `<slug>-card.jpg` (services grid
 
 - **Dark hero** (`.hero-dark`, inside `#hero-stack-wrap`) — headline "Solutions That Move Your Business Forward.", supporting line, description, CTA buttons, and a crane visual that animates in on load.
 - **Stats strip** (`.hero-stats-strip`, inside the hero) — animated once it scrolls into view: count-up 6 Service Areas / 21 Specialized Offerings / 567 Projects Delivered, an "Our Presence" tile with hand-drawn inline SVG flags (Pakistan/UAE/Saudi Arabia — emoji flags don't render as pictures on Windows, hence SVG), and a count-down "Layers Between You and Quality" (10 → 0).
-- **Stacked-section scroll effect** (site-wide on the homepage, implemented via a separate AI tool "Codex" on 2026-09-12 — supersedes an earlier hero-only pinning fix): every direct child section of `<main>` becomes a `.stack-panel`, pinning in turn as the user scrolls so each new section rises and covers the previous one (subtle darken via a `--stack-shade` custom property, no bounce/spin). Driven entirely by `assets/js/stack-scroll.js` (plain JS, no GSAP or other dependency) — it measures panel geometry on load/resize, sets `--stack-top` per panel so oversized panels finish scrolling before they pin, and updates `--stack-shade` plus `--plant-progress` / `--truck-progress` / `--office-progress` (for the plant → truck → office chapter reveal inside `#site-band` / `#site-stage`) on every scroll frame. Active only on desktop (≥960px width AND ≥600px height) — enabled via `body.stack-enabled` (set in JS, gated on a `(min-width: 960px) and (min-height: 600px)` media query) and CSS in `assets/css/style.css` under `.homepage`/`.stack-enabled`/`.stack-panel`. Automatically falls back to normal document flow (no pinning) when `prefers-reduced-motion: reduce` is set, when the viewport is smaller than the desktop threshold, or once the user tabs via keyboard (so focus never lands on a link hidden behind another layer). Anchor links (`#id`) are re-aligned correctly against normal flow via `alignAnchor()`. `<body class="homepage">` on index.html is what scopes all of this to the homepage only — about.html/contact.html are unaffected and scroll normally.
+- **Scroll story** (`#site-band` / `#site-stage`) — a 7-stage plant → truck → office → closing handshake sequence, desktop and mobile variants.
+- **Stacked-section scroll effect** — every direct child section of `<main>` becomes a `.stack-panel`, pinning in turn so each new section covers the previous one. Driven by `assets/js/stack-scroll.js` (plain JS, no dependencies). Desktop only (≥960px wide AND ≥600px tall, via `body.stack-enabled`); falls back to normal scrolling for `prefers-reduced-motion`, smaller viewports, or keyboard tabbing. `<body class="homepage">` scopes it to the homepage only.
 - **Services grid** ("Our Service Areas") — 6 category cards linking to the nav dropdown anchors.
-- Sectors, Process, FAQ sections (unchanged structural boilerplate).
-- Services **nav dropdown** (mega-menu, in the header, present on all 3 pages) lists all 6 categories with sub-service bullets and thumbnail images.
+- Sectors, Process, FAQ sections.
+- Services **nav dropdown** (mega-menu, on every page) lists all 6 categories with sub-service bullets and thumbnails.
 
 ### about.html
 
-- Company positioning copy (accountable coordinator, technical/commercial clarity, etc.) — the "Why Sazvar" 6-card grid.
-- **Our Leadership** (added 2026-09-12): Raheel Rao (Managing Director – Operations, Engineer/Dawood University, 11 years) and ZainUlAbdin (Managing Director – Finance, Chartered Accountant/ICAP, 11 years). Built as a centered flex grid (`.leadership-grid` / `.leadership-card` / `.leadership-photo` in style.css) so it accepts more members later without layout changes — just add another `.leadership-card` block.
+- Company positioning copy — the "Why Sazvar" 6-card grid.
+- **Our Leadership**: Raheel Rao (Managing Director – Operations, Engineer/Dawood University, 11 years) and ZainUlAbdin (Managing Director – Finance, Chartered Accountant/ICAP, 11 years). Centered flex grid (`.leadership-grid` / `.leadership-card`) — add another `.leadership-card` block for more members.
 
-### contact.html
+### contact.html + contact.php
 
-- Form fields: name, company/institution, work email, service (dropdown — kept in sync with the 6 service categories), requirement details.
-- **No real backend yet** — submit builds a `mailto:` link via `assets/js/main.js`; nothing is actually sent through the site. See "Open items."
+- Fields: name, company/institution, work email, service (dropdown — kept in sync with the 6 service categories), requirement details, plus a hidden honeypot field (`website`) that silently discards bot submissions.
+- `main.js` posts the form to `contact.php` with `fetch`. If the request itself fails (offline, PHP down), it falls back to opening a pre-filled `mailto:` draft so an enquiry is never lost.
+- `contact.php` validates input, strips header-injection characters, and emails info@sazvar.com with Reply-To set to the enquirer.
+  - **With `smtp-config.php` on the server**: sends via authenticated SMTP (smtp.hostinger.com) — better deliverability.
+  - **Without it**: falls back to PHP `mail()` (Hostinger limit: 10/min, 100/day; more likely to hit spam).
+  - `smtp-config.php` holds the mailbox password, lives **only on the server**, and is git-ignored. Create it from `smtp-config.sample.php` via hPanel File Manager. Never send the password through git or an AI chat.
+  - Send failures are written to the PHP error log (viewable in hPanel).
+
+### 404.html
+
+Served by `.htaccess` (`ErrorDocument 404`) for any missing URL. Uses root-relative paths (`/assets/...`) so it renders correctly at any URL depth — keep it that way if you edit it. Opening it directly from disk (file://) will look unstyled; that's expected.
+
+## Server config (.htaccess)
+
+- Caching: HTML always revalidated; images/CSS/JS cached 1 year (`immutable`) — hence the `?v=` cache-busting rule above.
+- Security headers: HSTS (1 year, no includeSubDomains), nosniff, X-Frame-Options SAMEORIGIN, Referrer-Policy, Permissions-Policy. Hostinger itself adds `Content-Security-Policy: upgrade-insecure-requests`. A full CSP was not added because the pages use inline scripts/styles.
+- Blocked from the web (return 404): `.git`, `IMAGES/`, `lib/`, `Brand Identity/`, any `.md` file, `hero-preview.html`, `smtp-config*.php`, `.gitignore`, `.htaccess`. These stay in the repo — they're just not public. **If you add another internal file, add it to these rules.**
+- HTTP → HTTPS redirect is handled by Hostinger. SSL is Let's Encrypt (auto-renews).
+
+## Email / DNS (as of 2026-10-23)
+
+- MX → Hostinger (mx1/mx2.hostinger.com). SPF: `v=spf1 include:_spf.mail.hostinger.com ~all`.
+- DMARC: `v=DMARC1; p=none` (monitor only). DKIM: not confirmed in the audit — check hPanel → Emails → DNS settings.
 
 ## Design system
 
@@ -76,24 +106,25 @@ Service image naming follows the category slug: `<slug>-card.jpg` (services grid
 
 Tagline "Built On Reliability" appears once, directly under the bilingual "SAZVAR | سازوار" wordmark in the header — never repeated in hero body copy. No fabricated statistics anywhere on the site — every number shown is real.
 
-## Deployment status
+## Performance notes
 
-**Not yet deployed.** The domain sazvar.com is purchased but not pointed at any hosting. This is a plain static site, so deployment is simple whenever the user is ready:
-
-- Simplest: Hostinger File Manager/FTP — upload everything in `sazvar-static/` (keeping `assets/` intact) to the domain's `public_html`. No build step, no Node hosting.
-- Alternative: GitHub Pages — push this folder to a repo and enable Pages; works fine for a static site, but is a separate decision from the Hostinger route above (don't do both without the user choosing).
-- No git repository exists yet for this project folder.
+Hero images ship as WebP with PNG fallback, in two sizes (`-lg` for desktop, `-sm` for mobile) via `<picture>`, so phones don't download desktop-sized images. CSS/JS are minified (`.min` files). Keep this pattern for any new large image.
 
 ## Open / pending items
 
-1. Real contact-form backend (Web3Forms, Formspree, or similar) — currently `mailto:` only.
-2. Domain DNS / hosting decision (Hostinger vs. GitHub Pages) and actually going live.
-3. Wording review, flagged to the user, not yet acted on: "Commercial & Utility-Scale Solar" may overstate project scale, and "Freight Management & Fleet Solutions" may imply Sazvar owns trucks — both possibly worth softening to match the "coordinator, not asset owner" positioning used elsewhere.
-4. Possible leftover orphaned images on disk from earlier service-category slugs (pre-restructure) — cosmetic disk cleanup only, not user-facing.
-5. `hero-preview.html` is a leftover design-comparison page, not linked anywhere — safe to delete whenever, kept for now only as a reference of the "before" light-hero design.
+**Owner is handling (as of 2026-10-23):**
+1. Create `smtp-config.php` on the server (see contact.php section) — until then the form uses the `mail()` fallback.
+2. Send one real test enquiry and confirm it lands in the info@sazvar.com inbox, not spam.
+
+**Planned:**
+3. Once real form emails are confirmed arriving: confirm DKIM is on, then tighten DMARC from `p=none` to `p=quarantine` (DNS change in hPanel).
+4. PHPMailer 7.x is out (7.1.1, May 2026); site has 6.9.3. Major-version upgrade — test the form after upgrading. No known security issue in 6.9.3 at audit time.
+5. Wording review, not yet acted on: "Commercial & Utility-Scale Solar" may overstate project scale, and "Freight Management & Fleet Solutions" may imply Sazvar owns trucks — possibly worth softening to match the "coordinator, not asset owner" positioning.
+6. Possible orphaned images on disk from earlier service-category slugs — cosmetic cleanup only.
+7. Optional: submit `https://sazvar.com/sitemap.xml` in Google Search Console.
 
 ## How to resume a session
 
 1. Read this file, then skim `Sazvar Business Identity.docx` for approved copy/brand facts if writing new content.
-2. Confirm with the user whether deployment status has changed before assuming the site is or isn't live.
+2. Ask the user how changes are deployed to Hostinger before pushing or uploading anything.
 3. Don't touch `E:\WEBSITE\SAZVAR\sazvar-website\` (abandoned Next.js attempt) or `E:\WEBSITE\SAZVAR\HLM\` (a different, unrelated business) as if they were this project.

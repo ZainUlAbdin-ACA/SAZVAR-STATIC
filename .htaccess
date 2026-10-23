@@ -30,4 +30,26 @@
   <FilesMatch "\.html$">
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>
+
+  # Security headers. HSTS is deliberately left without includeSubDomains,
+  # so any subdomain that isn't on HTTPS yet keeps working.
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+</IfModule>
+
+# Branded "page not found" page. Uses root-relative links so it works at any depth.
+ErrorDocument 404 /404.html
+
+# Keep internal files off the public web. They stay in the repo for editing,
+# but the server answers 404 as if they didn't exist. contact.php still loads
+# lib/phpmailer from disk, so blocking web access to lib/ doesn't affect it.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule (^|/)\.git(/|$) - [R=404,L]
+  RewriteRule ^(IMAGES|lib|Brand[\s]Identity)(/|$) - [R=404,L]
+  RewriteRule \.md$ - [R=404,L]
+  RewriteRule ^(hero-preview\.html|smtp-config(\.sample)?\.php|\.gitignore|\.htaccess)$ - [R=404,L]
 </IfModule>
