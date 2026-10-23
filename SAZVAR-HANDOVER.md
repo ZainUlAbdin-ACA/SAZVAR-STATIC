@@ -77,7 +77,7 @@ Service image naming follows the category slug: `<slug>-card.jpg` (services grid
 - Fields: name, company/institution, work email, service (dropdown — kept in sync with the 6 service categories), requirement details, plus a hidden honeypot field (`website`) that silently discards bot submissions.
 - `main.js` posts the form to `contact.php` with `fetch`. If the request itself fails (offline, PHP down), it falls back to opening a pre-filled `mailto:` draft so an enquiry is never lost.
 - `contact.php` validates input, strips header-injection characters, and emails info@sazvar.com with Reply-To set to the enquirer.
-  - **With `smtp-config.php` on the server**: sends via authenticated SMTP (smtp.hostinger.com) — better deliverability.
+  - **With `smtp-config.php` on the server** (in place since 2026-10-23): sends via authenticated SMTP (smtp.hostinger.com) — better deliverability.
   - **Without it**: falls back to PHP `mail()` (Hostinger limit: 10/min, 100/day; more likely to hit spam).
   - `smtp-config.php` holds the mailbox password, lives **only on the server**, and is git-ignored. Create it from `smtp-config.sample.php` via hPanel File Manager. Never send the password through git or an AI chat.
   - Send failures are written to the PHP error log (viewable in hPanel).
@@ -112,12 +112,10 @@ Hero images ship as WebP with PNG fallback, in two sizes (`-lg` for desktop, `-s
 
 ## Open / pending items
 
-**Owner is handling (as of 2026-10-23):**
-1. Create `smtp-config.php` on the server (see contact.php section) — until then the form uses the `mail()` fallback.
-2. Send one real test enquiry and confirm it lands in the info@sazvar.com inbox, not spam.
+**Done 2026-10-23:** `smtp-config.php` created on the server (form now sends via SMTP), and a real test enquiry arrived in the info@sazvar.com inbox.
 
-**Planned:**
-3. Once real form emails are confirmed arriving: confirm DKIM is on, then tighten DMARC from `p=none` to `p=quarantine` (DNS change in hPanel).
+**Planned (optional, nothing urgent):**
+3. Confirm DKIM is on, then tighten DMARC from `p=none` to `p=quarantine` (DNS change in hPanel).
 4. PHPMailer 7.x is out (7.1.1, May 2026); site has 6.9.3. Major-version upgrade — test the form after upgrading. No known security issue in 6.9.3 at audit time.
 5. Wording review, not yet acted on: "Commercial & Utility-Scale Solar" may overstate project scale, and "Freight Management & Fleet Solutions" may imply Sazvar owns trucks — possibly worth softening to match the "coordinator, not asset owner" positioning.
 6. Possible orphaned images on disk from earlier service-category slugs — cosmetic cleanup only.
