@@ -16,4 +16,4 @@ Change the text directly in any `.html` file. If you edit `style.css` or a `.js`
 
 ## Deploy to Hostinger
 
-Upload the changed files to the `sazvar.com` domain's `public_html` folder (File Manager or FTP), keeping the folder structure. Never upload or commit `smtp-config.php` from here — create it on the server only.
+Push to `main` on GitHub. Hostinger auto-deploys it to sazvar.com within about a minute. Never commit `smtp-config.php`; create it on the server only.

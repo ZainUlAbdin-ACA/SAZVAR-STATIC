@@ -24,7 +24,7 @@ There is also `E:\WEBSITE\SAZVAR\sazvar-website\` — an earlier Next.js scaffol
 
 Plain HTML/CSS/JS pages, no framework and no build step. The **only** server-side code is `contact.php` (the contact form), which runs on Hostinger's PHP (8.3 as of the 2026-10-23 audit) and sends mail with a bundled copy of PHPMailer. No database.
 
-Git: this folder is a git repo, remote `https://github.com/ZainUlAbdin-ACA/SAZVAR-STATIC.git` (branch `main`). Confirm with the user how changes reach Hostinger (git deploy vs. File Manager upload) before assuming either.
+Git: this folder is a git repo, remote `https://github.com/ZainUlAbdin-ACA/SAZVAR-STATIC.git` (branch `main`). **Hostinger auto-deploys from this repo: every push to `main` goes live on sazvar.com within about a minute** (confirmed 2026-10-23). Treat a push as a production release, and check the live site afterwards.
 
 ## File structure
 
@@ -126,5 +126,5 @@ Hero images ship as WebP with PNG fallback, in two sizes (`-lg` for desktop, `-s
 ## How to resume a session
 
 1. Read this file, then skim `Sazvar Business Identity.docx` for approved copy/brand facts if writing new content.
-2. Ask the user how changes are deployed to Hostinger before pushing or uploading anything.
+2. Remember that pushing to `main` deploys live — only commit and push when the user asks.
 3. Don't touch `E:\WEBSITE\SAZVAR\sazvar-website\` (abandoned Next.js attempt) or `E:\WEBSITE\SAZVAR\HLM\` (a different, unrelated business) as if they were this project.
